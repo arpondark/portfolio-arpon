@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     "Next.js",
     "Three.js",
   ],
+
 };
 
 export default function RootLayout({
