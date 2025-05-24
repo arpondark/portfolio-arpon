@@ -40,6 +40,44 @@ export const metadata: Metadata = {
     initialScale: 1,
     maximumScale: 1,
   },
+  // Open Graph metadata
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://arpon007.me',
+    siteName: "MD SHAZAN MAHMUD ARPON - Portfolio",
+    title: "MD SHAZAN MAHMUD ARPON - Portfolio",
+    description: "Fullstack Developer | IoT Enthusiast | AI Passionate",
+    images: [
+      {
+        url: '/og-image.png', // You'll need to create this image
+        width: 1200,
+        height: 630,
+        alt: 'MD SHAZAN MAHMUD ARPON - Portfolio Preview',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "MD SHAZAN MAHMUD ARPON - Portfolio",
+    description: "Fullstack Developer | IoT Enthusiast | AI Passionate",
+    images: ['/og-image.png'],
+    creator: '@arpondark',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'your-google-site-verification', // Add your Google verification code
+  },
 };
 
 export default function RootLayout({
