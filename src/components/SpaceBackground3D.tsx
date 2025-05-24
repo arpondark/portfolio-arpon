@@ -1,10 +1,9 @@
 "use client";
 
-import { useRef, useMemo } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Stars, useTexture } from '@react-three/drei';
-import * as THREE from 'three';
-import { random } from 'maath';
+import { useRef, useMemo } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Stars } from "@react-three/drei";
+import * as THREE from "three";
 import TechLogos3D from './TechLogos3D';
 
 // Nebula effect component
@@ -34,7 +33,7 @@ const Nebula = () => {
     return { positions, colors };
   }, []);
 
-  useFrame((state) => {
+  useFrame(() => {
     if (meshRef.current) {
       meshRef.current.rotation.x += 0.0001;
       meshRef.current.rotation.y += 0.0002;
@@ -71,6 +70,14 @@ const Nebula = () => {
 
 // Main background component
 const SpaceScene = () => {
+  const groupRef = useRef<THREE.Group>(null);
+
+  useFrame(() => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y += 0.0005;
+    }
+  });
+
   return (
     <>
       {/* Stars */}

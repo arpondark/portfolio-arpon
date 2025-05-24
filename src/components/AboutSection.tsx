@@ -17,11 +17,11 @@ export default function AboutSection() {
           <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">
             About Me
           </h2>
-          <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-            I am a Computer Science student with a passion for technology and innovation. 
+          <p className="text-gray-300 text-lg leading-relaxed">
+            I&apos;m a passionate technology enthusiast with a keen interest in Fullstack Web Development, IoT, and AI. 
             My journey in tech has led me to explore various domains including Fullstack Web Development, 
             IoT, and AI. I love creating immersive digital experiences and solving complex problems 
-            through code. When I'm not coding, you can find me exploring new technologies, 
+            through code. When I&apos;m not coding, you can find me exploring new technologies, 
             contributing to open-source projects, or sharing my knowledge with the tech community.
           </p>
         </div>

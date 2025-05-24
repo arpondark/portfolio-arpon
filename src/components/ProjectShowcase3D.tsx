@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Canvas, useFrame, useThree, extend } from "@react-three/fiber";
 import { Text, useTexture, Html, PerspectiveCamera, Environment, Float, PresentationControls, MeshDistortMaterial, GradientTexture } from "@react-three/drei";
 import * as THREE from "three";
+import Image from "next/image";
 
 // Extend Three.js objects
 extend(THREE.Group);
@@ -52,20 +53,13 @@ function Particles() {
     return positions;
   }, []);
 
-  useFrame((state) => {
-    if (particlesRef.current) {
-      particlesRef.current.rotation.y = state.clock.getElapsedTime() * 0.05;
-      particlesRef.current.rotation.x = Math.sin(state.clock.getElapsedTime() * 0.1) * 0.1;
-    }
-  });
-
   return (
     <points ref={particlesRef}>
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
+          args={[positions, 3]}
           count={particlesCount}
-          array={positions}
           itemSize={3}
         />
       </bufferGeometry>
@@ -170,7 +164,7 @@ function ProjectCard({ project, index, totalProjects, isSelected, onSelect }: {
     }
   });
 
-  const handleClick = (e: any) => {
+  const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     onSelect();
   };
@@ -313,7 +307,6 @@ function ProjectCard({ project, index, totalProjects, isSelected, onSelect }: {
 
 // Card View Component
 function ProjectCardView({ project }: { project: typeof projects[0] }) {
-  const [isHovered, setIsHovered] = useState(false);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   const handleLinkClick = (e: React.MouseEvent, url: string) => {
@@ -339,9 +332,11 @@ function ProjectCardView({ project }: { project: typeof projects[0] }) {
           {!isImageLoaded && (
             <div className="absolute inset-0 bg-gray-800 animate-pulse" />
           )}
-          <img
+          <Image
             src={project.image}
             alt={project.title}
+            width={600}
+            height={400}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             onLoad={() => setIsImageLoaded(true)}
           />
@@ -402,11 +397,10 @@ function ProjectCardView({ project }: { project: typeof projects[0] }) {
 }
 
 function Scene() {
-  const { camera } = useThree();
   const groupRef = useRef<THREE.Group>(null);
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
 
-  useFrame((state) => {
+  useFrame(() => {
     if (groupRef.current && !selectedProject) {
       groupRef.current.rotation.y += 0.003;
     }
@@ -500,15 +494,15 @@ export default function ProjectShowcase3D() {
                 alpha: true,
                 powerPreference: "high-performance",
               }}
-              dpr={[1, 2]} // Optimize for different screen densities
+              dpr={[1, 2]}
             >
               <PresentationControls
                 global
                 rotation={[0, 0, 0]}
                 polar={[-Math.PI / 4, Math.PI / 4]}
                 azimuth={[-Math.PI / 4, Math.PI / 4]}
-                config={{ mass: 2, tension: 400 }}
-                snap={{ mass: 4, tension: 400 }}
+                enabled={true}
+                snap={true}
               >
                 <Scene />
               </PresentationControls>
