@@ -3,7 +3,7 @@
 import { useRef, useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Canvas, useFrame, useThree, extend } from "@react-three/fiber";
-import { Text, useTexture, Html, PerspectiveCamera, Environment, Float, PresentationControls, MeshDistortMaterial, GradientTexture } from "@react-three/drei";
+import { useTexture, Html, Environment, PresentationControls, GradientTexture } from "@react-three/drei";
 import * as THREE from "three";
 import Image from "next/image";
 

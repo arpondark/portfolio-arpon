@@ -19,6 +19,13 @@ const techLogos = [
   { name: 'Git', path: '/tech/git.svg', speed: 0.021 }
 ];
 
+// Type for logo instance
+type LogoInstance = {
+  logo: typeof techLogos[0];
+  speed: number;
+  position: THREE.Vector3;
+};
+
 // Floating logo component
 function FloatingLogo({ logo, position, speed }: { 
   logo: typeof techLogos[0]; 
@@ -88,7 +95,7 @@ function FloatingLogo({ logo, position, speed }: {
 function SectionScene() {
   // Create multiple instances of each logo at different positions
   const logoInstances = useMemo(() => {
-    const instances = [];
+    const instances: LogoInstance[] = [];
     techLogos.forEach((logo) => {
       // Create 3 instances of each logo
       for (let i = 0; i < 3; i++) {

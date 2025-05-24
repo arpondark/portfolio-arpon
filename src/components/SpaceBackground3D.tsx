@@ -45,15 +45,13 @@ const Nebula = () => {
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
+          args={[particles.positions, 3]}
           count={particles.positions.length / 3}
-          array={particles.positions}
-          itemSize={3}
         />
         <bufferAttribute
           attach="attributes-color"
+          args={[particles.colors, 3]}
           count={particles.colors.length / 3}
-          array={particles.colors}
-          itemSize={3}
         />
       </bufferGeometry>
       <pointsMaterial
