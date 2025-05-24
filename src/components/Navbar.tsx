@@ -39,24 +39,31 @@ export default function Navbar() {
 
   return (
     <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-black/80 backdrop-blur-lg' : 'bg-black/40 backdrop-blur-md'
-      } border-b border-white/10`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled 
+          ? 'bg-black/30 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-purple-500/5' 
+          : 'bg-transparent backdrop-blur-md'
+      }`}
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 z-50">
-            <div className="relative w-10 h-10">
+          <Link 
+            href="/" 
+            className="flex items-center space-x-3 z-50 group"
+          >
+            <div className="relative w-12 h-12 transition-transform duration-300 group-hover:scale-110">
               <Image
                 src="/logo.png"
                 alt="AR Portfolio"
                 fill
-                className="object-contain"
+                className="object-contain drop-shadow-[0_0_8px_rgba(79,70,229,0.3)]"
                 priority
               />
             </div>
-            <span className="text-xl font-bold gradient-text">SHAZAN&apos;S Portfolio</span>
+            <span className="text-2xl font-bold gradient-text tracking-tight">
+              SHAZAN&apos;S Portfolio
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -76,15 +83,15 @@ export default function Navbar() {
             <div className="w-6 h-5 relative flex flex-col justify-between">
               <motion.span
                 animate={isMobileMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-                className="w-full h-0.5 bg-current block transition-transform"
+                className="w-full h-0.5 bg-current block transition-transform origin-left"
               />
               <motion.span
-                animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-                className="w-full h-0.5 bg-current block"
+                animate={isMobileMenuOpen ? { opacity: 0, x: -20 } : { opacity: 1, x: 0 }}
+                className="w-full h-0.5 bg-current block transition-all"
               />
               <motion.span
                 animate={isMobileMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-                className="w-full h-0.5 bg-current block transition-transform"
+                className="w-full h-0.5 bg-current block transition-transform origin-left"
               />
             </div>
           </button>
@@ -99,10 +106,10 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden mobile-menu fixed inset-0 bg-black/95 backdrop-blur-lg z-40"
+            className="md:hidden mobile-menu fixed inset-0 bg-black/95 backdrop-blur-xl z-40"
           >
             <div className="container mx-auto px-4 pt-24 pb-8">
-              <div className="flex flex-col space-y-6">
+              <div className="flex flex-col space-y-8">
                 <MobileNavLink href="#about" onClick={() => setIsMobileMenuOpen(false)}>
                   About
                 </MobileNavLink>
@@ -128,13 +135,18 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
   return (
     <Link
       href={href}
-      className="relative text-gray-300 hover:text-white transition-colors duration-200 group"
+      className="relative text-gray-300 hover:text-white transition-colors duration-200 group px-2 py-1"
     >
       {children}
       <motion.span
         className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-600 group-hover:w-full transition-all duration-300"
         initial={{ width: 0 }}
         whileHover={{ width: "100%" }}
+      />
+      <motion.span
+        className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/10 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"
+        initial={{ opacity: 0 }}
+        whileHover={{ opacity: 1 }}
       />
     </Link>
   );
@@ -153,15 +165,21 @@ function MobileNavLink({
     <Link
       href={href}
       onClick={onClick}
-      className="text-2xl font-medium text-gray-300 hover:text-white transition-colors duration-200 py-2"
+      className="text-2xl font-medium text-gray-300 hover:text-white transition-colors duration-200 py-2 group"
     >
       <motion.div
         initial={{ x: -20, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         exit={{ x: -20, opacity: 0 }}
         transition={{ duration: 0.2 }}
+        className="relative"
       >
         {children}
+        <motion.span
+          className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-600 group-hover:w-full transition-all duration-300"
+          initial={{ width: 0 }}
+          whileHover={{ width: "100%" }}
+        />
       </motion.div>
     </Link>
   );
