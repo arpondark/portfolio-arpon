@@ -1,5 +1,7 @@
 # 🚀 Arpon's Portfolio
 
+[Preview Link](https://portfolio-arpon.vercel.app)
+
 > A modern, interactive portfolio website showcasing my skills, projects, and experience
 
 [![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)](https://nextjs.org/)
@@ -30,7 +32,7 @@
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/portfolio-arpon.git
+   git clone https://github.com/arpondark/portfolio-arpon.git
    cd portfolio-arpon
    ```
 
@@ -102,7 +104,7 @@ npm run lint         # Run ESLint
 
 The easiest way to deploy this portfolio is using [Vercel](https://vercel.com):
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/your-username/portfolio-arpon)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/arpondark/portfolio-arpon)
 
 Alternatively, you can deploy to:
 - **Netlify** - Connect your GitHub repository
@@ -130,8 +132,8 @@ This project is [MIT](LICENSE) licensed.
 <div align="center">
   <p>Made with ❤️ by Arpon</p>
   <p>
-    <a href="https://github.com/your-username">GitHub</a> •
-    <a href="https://linkedin.com/in/your-username">LinkedIn</a> •
-    <a href="https://your-portfolio-url.com">Portfolio</a>
+    <a href="https://github.com/arpondark">GitHub</a> •
+    <a href="https://www.linkedin.com/in/md-shazan-mahmud-arpon">LinkedIn</a> •
+    <a href="https://portfolio-arpon.vercel.app/">Portfolio</a>
   </p>
 </div>
