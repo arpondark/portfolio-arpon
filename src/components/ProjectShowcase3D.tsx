@@ -1,359 +1,485 @@
 "use client";
 
-import { useRef, useState, useMemo, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Canvas, useFrame, useThree, extend } from "@react-three/fiber";
-import { useTexture, Html, Environment, PresentationControls, GradientTexture } from "@react-three/drei";
-import * as THREE from "three";
+import { useState, useEffect, useRef } from "react";
+import { motion, useMotionTemplate, useMotionValue, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { ExternalLink, Github, Eye, Code2, Zap, ChevronLeft, ChevronRight, Filter } from "lucide-react";
 import Image from "next/image";
 
-// Extend Three.js objects
-extend(THREE.Group);
-
-// Background gradient colors
-const gradientColors = ['#1a1a1a', '#2d1b69', '#1a1a1a'];
-
-// Background component
-function Background() {
-  const meshRef = useRef<THREE.Mesh>(null);
-  const { viewport } = useThree();
-
-  useFrame((state) => {
-    if (meshRef.current) {
-      // Subtle movement based on time
-      meshRef.current.rotation.z = Math.sin(state.clock.getElapsedTime() * 0.1) * 0.1;
-    }
-  });
-
-  return (
-    <mesh ref={meshRef} position={[0, 0, -10]} scale={[viewport.width * 2, viewport.height * 2, 1]}>
-      <planeGeometry />
-      <meshBasicMaterial>
-        <GradientTexture
-          stops={[0, 0.5, 1]}
-          colors={gradientColors}
-          size={1024}
-        />
-      </meshBasicMaterial>
-    </mesh>
-  );
-}
-
-// Animated particles component
-function Particles() {
-  const particlesRef = useRef<THREE.Points>(null);
-  const particlesCount = 1000;
-  const positions = useMemo(() => {
-    const positions = new Float32Array(particlesCount * 3);
-    for (let i = 0; i < particlesCount; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 50;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 50;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 50;
-    }
-    return positions;
-  }, []);
-
-  return (
-    <points ref={particlesRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          args={[positions, 3]}
-          count={particlesCount}
-          itemSize={3}
-        />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.1}
-        color="#4f46e5"
-        transparent
-        opacity={0.3}
-        sizeAttenuation
-        blending={THREE.AdditiveBlending}
-      />
-    </points>
-  );
-}
-
+// Project data
 const projects = [
   {
+    id: 1,
+    title: "UIU Robotics Lab",
+    description: "Official website for United International University Robotics Lab - showcasing research, projects, and achievements in robotics and automation.",
+    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop",
+    link: "https://robotics.uiu.ac.bd/",
+    github: "#",
+    tech: ["React", "Next.js", "Tailwind CSS", "Node.js"],
+    highlights: ["Institutional Website", "Research Showcase", "Modern Design"],
+    category: "Institutional",
+    featured: true
+  },
+  {
+    id: 2,
     title: "Love Proposal Platform",
     description: "A beautiful platform for creating and sharing marriage proposals with interactive cards and animations.",
     image: "/love-propose.png",
     link: "https://www.lovepropose.fun/",
-    github: "https://github.com/arpondark/love-propose",
+    github: "https://github.com/mdshazanmahmudarpon/love-propose",
     tech: ["React", "Firebase", "Tailwind CSS", "Framer Motion"],
-    highlights: ["Interactive Cards", "Real-time Updates", "Custom Animations", "Responsive Design"]
+    highlights: ["Interactive Cards", "Real-time Updates", "Custom Animations"],
+    category: "Web Application",
+    featured: true
   },
   {
+    id: 3,
+    title: "Pita as a Service",
+    description: "A modern food delivery and service platform with seamless ordering experience and real-time tracking.",
+    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=400&fit=crop",
+    link: "https://pitasaservice.com/",
+    github: "#",
+    tech: ["React", "Node.js", "MongoDB", "Express"],
+    highlights: ["Food Ordering", "Real-time Tracking", "Payment Integration"],
+    category: "E-Commerce",
+    featured: true
+  },
+  {
+    id: 4,
     title: "Barta Test",
     description: "A news portal application with real-time updates and interactive features.",
     image: "/barta-test.png",
     link: "https://bartatest.netlify.app/",
-    github: "https://github.com/arpondark/barta-test",
+    github: "https://github.com/mdshazanmahmudarpon/barta-test",
     tech: ["React", "Node.js", "MongoDB", "Express"],
-    highlights: ["Real-time News", "User Authentication", "Admin Dashboard", "Search Functionality"]
+    highlights: ["Real-time News", "User Authentication", "Admin Dashboard"],
+    category: "News Portal",
+    featured: true
   },
   {
+    id: 5,
+    title: "Fitness Tracker Platform",
+    description: "A comprehensive fitness tracking platform built with microservices architecture for scalability.",
+    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop",
+    link: "#",
+    github: "https://github.com/arpondark/Microservice-spring-boot-fitness",
+    tech: ["Spring Boot", "React", "Docker", "MongoDB"],
+    highlights: ["Microservices", "Real-time Analytics", "Scalable Backend"],
+    category: "Microservices",
+    featured: true
+  },
+  {
+    id: 6,
+    title: "URL Shortener",
+    description: "A high-performance URL shortening service with analytics and custom short URLs.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
+    link: "#",
+    github: "https://github.com/arpondark/shortner-spring-boot",
+    tech: ["Spring Boot", "React", "Redis", "MySQL"],
+    highlights: ["Click Analytics", "QR Code", "API Integration"],
+    category: "Web Service",
+    featured: true
+  },
+  {
+    id: 7,
+    title: "Real-Time Chat App",
+    description: "A modern real-time chat application with WebSocket support and rich messaging features.",
+    image: "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=600&h=400&fit=crop",
+    link: "#",
+    github: "https://github.com/arpondark/chat-app-spring-boot",
+    tech: ["Spring Boot", "React", "WebSocket", "MongoDB"],
+    highlights: ["Real-time Messaging", "Group Chats", "File Sharing"],
+    category: "Chat Application",
+    featured: false
+  },
+  {
+    id: 8,
+    title: "Todo Application",
+    description: "A feature-rich todo application with drag-and-drop functionality and task management.",
+    image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&h=400&fit=crop",
+    link: "https://sage-tapioca-7c648d.netlify.app/",
+    github: "https://github.com/mdshazanmahmudarpon/todo-app",
+    tech: ["React", "TypeScript", "Tailwind CSS", "DnD Kit"],
+    highlights: ["Drag & Drop", "Task Categories", "Dark Mode"],
+    category: "Productivity",
+    featured: false
+  },
+  {
+    id: 9,
     title: "Blog Platform",
     description: "A modern blog platform with rich text editing and social features.",
-    image: "https://placehold.co/600x400/1a1a1a/4f46e5?text=Blog+Platform",
+    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&h=400&fit=crop",
     link: "https://blog-arpon007.netlify.app/",
-    github: "https://github.com/arpondark/blog-platform",
+    github: "https://github.com/mdshazanmahmudarpon/blog-platform",
     tech: ["React", "Firebase", "Material UI", "Redux"],
-    highlights: ["Rich Text Editor", "Social Sharing", "Comment System", "User Profiles"]
+    highlights: ["Rich Text Editor", "Social Sharing", "Comments"],
+    category: "Blog Platform",
+    featured: false
   },
   {
+    id: 10,
     title: "Love Me Fun",
     description: "An interactive dating platform with modern UI and real-time chat features.",
-    image: "https://placehold.co/600x400/1a1a1a/4f46e5?text=Love+Me+Fun",
+    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop",
     link: "https://love-mefun.netlify.app/",
-    github: "https://github.com/arpondark/love-me",
+    github: "https://github.com/mdshazanmahmudarpon/love-me",
     tech: ["React", "Socket.io", "Node.js", "MongoDB"],
-    highlights: ["Real-time Chat", "User Matching", "Profile Customization", "Location-based Search"]
-  },
-  {
-    title: "Todo App",
-    description: "A feature-rich todo application with drag-and-drop functionality and task management.",
-    image: "https://placehold.co/600x400/1a1a1a/4f46e5?text=Todo+App",
-    link: "https://sage-tapioca-7c648d.netlify.app/",
-    github: "https://github.com/arpondark/todo-app",
-    tech: ["React", "TypeScript", "Tailwind CSS", "DnD Kit"],
-    highlights: ["Drag & Drop", "Task Categories", "Progress Tracking", "Dark/Light Mode"]
+    highlights: ["Real-time Chat", "User Matching", "Location Search"],
+    category: "Social Platform",
+    featured: false
   }
 ];
 
-function ProjectCard({ project, index, totalProjects, isSelected, onSelect }: { 
-  project: typeof projects[0]; 
-  index: number; 
-  totalProjects: number;
-  isSelected: boolean;
-  onSelect: () => void;
-}) {
-  const meshRef = useRef<THREE.Group>(null);
-  const texture = useTexture(project.image);
-  const [hovered, setHovered] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+type FilterType = 'all' | 'featured' | 'web' | 'backend';
 
-  // Calculate position in a circle
-  const angle = (index / totalProjects) * Math.PI * 2;
-  const radius = isSelected ? 0 : 12;
-  const x = Math.cos(angle) * radius;
-  const z = Math.sin(angle) * radius;
-  const y = isSelected ? 0 : Math.sin(index * 0.5) * 2;
+export default function ProjectShowcase3D() {
+  const [filter, setFilter] = useState<FilterType>('all');
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (texture) {
-      texture.colorSpace = THREE.SRGBColorSpace;
-      setIsLoaded(true);
-    }
-  }, [texture]);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
 
-  useFrame((state) => {
-    if (meshRef.current && !isSelected) {
-      // Smooth rotation to face center
-      meshRef.current.lookAt(0, 0, 0);
-      
-      // Floating animation
-      meshRef.current.position.y = y + Math.sin(state.clock.getElapsedTime() * 0.5 + index) * 0.2;
-      
-      // Hover effect
-      if (hovered) {
-        meshRef.current.rotation.y += 0.02;
-      }
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
+
+  const filteredProjects = projects.filter(project => {
+    switch (filter) {
+      case 'featured':
+        return project.featured;
+      case 'web':
+        return project.tech.some(t => ['React', 'Next.js', 'Vue'].includes(t));
+      case 'backend':
+        return project.tech.some(t => ['Spring Boot', 'Node.js', 'Express', 'Laravel'].includes(t));
+      default:
+        return true;
     }
   });
 
-  const handleClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    onSelect();
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -350, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 350, behavior: 'smooth' });
+    }
   };
 
   return (
-    <primitive
-      object={new THREE.Group()}
-      ref={meshRef}
-      position={[x, y, z]}
-      onPointerOver={() => setHovered(true)}
-      onPointerOut={() => setHovered(false)}
-      onClick={handleClick}
-      scale={hovered ? 1.1 : isSelected ? 1.5 : 1}
+    <section
+      ref={containerRef}
+      id="projects"
+      className="relative py-24 md:py-32 overflow-hidden"
     >
-      {/* Card background with gradient */}
-      <mesh>
-        <boxGeometry args={[4, 6, 0.1]} />
-        <meshStandardMaterial
-          color="#1a1a1a"
-          metalness={0.8}
-          roughness={0.2}
-          transparent
-          opacity={0.95}
-          envMapIntensity={1}
-        />
-      </mesh>
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/10 to-black" />
+      <div className="absolute inset-0 bg-grid opacity-20" />
 
-      {/* Project image with loading state */}
-      <mesh position={[0, 0.5, 0.06]}>
-        <planeGeometry args={[3.8, 2.5]} />
-        <meshBasicMaterial
-          map={texture}
-          transparent
-          opacity={isLoaded ? 0.9 : 0}
-          side={THREE.DoubleSide}
-        />
-      </mesh>
+      {/* Floating orbs */}
+      <motion.div
+        style={{ y }}
+        className="absolute top-1/4 -right-32 w-80 h-80 rounded-full bg-gradient-to-br from-purple-500/20 to-transparent blur-3xl"
+      />
+      <motion.div
+        style={{ y: useTransform(scrollYProgress, [0, 1], [-30, 30]) }}
+        className="absolute bottom-1/4 -left-32 w-80 h-80 rounded-full bg-gradient-to-br from-pink-500/15 to-transparent blur-3xl"
+      />
 
-      {/* Loading placeholder */}
-      {!isLoaded && (
-        <mesh position={[0, 0.5, 0.06]}>
-          <planeGeometry args={[3.8, 2.5]} />
-          <meshBasicMaterial color="#2d2d2d" />
-        </mesh>
-      )}
+      {/* Mouse follow effect */}
+      <DynamicBackground />
 
-      {/* Project info with clickable links */}
-      <Html
-        position={[0, -2, 0.06]}
-        style={{
-          width: '300px',
-          padding: '15px',
-          color: 'white',
-          textAlign: 'center',
-          pointerEvents: 'auto',
-          background: 'rgba(26, 26, 26, 0.95)',
-          borderRadius: '12px',
-          backdropFilter: 'blur(10px)',
-          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
-        }}
-        transform
-        occlude
-      >
-        <div 
-          className="text-center space-y-3"
-          onClick={(e) => e.stopPropagation()}
+      <div className="container-custom relative z-10">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
         >
-          <h3 className="text-xl font-bold text-purple-400 line-clamp-1">{project.title}</h3>
-          <p className="text-sm text-gray-300 line-clamp-2">{project.description}</p>
-          
-          {/* Project highlights */}
-          <div className="grid grid-cols-2 gap-2 mt-2">
-            {project.highlights.map((highlight) => (
-              <span
-                key={highlight}
-                className="px-2 py-1 text-xs bg-purple-500/10 text-purple-300 rounded-full border border-purple-500/20"
-              >
-                {highlight}
-              </span>
-            ))}
-          </div>
+          <motion.div
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 mb-6"
+          >
+            <Zap className="w-4 h-4 text-purple-400" />
+            <span className="text-sm text-purple-300">Featured Projects</span>
+          </motion.div>
 
-          {/* Tech stack */}
-          <div className="flex flex-wrap gap-1 justify-center mt-2">
-            {project.tech.map((tech) => (
-              <span
-                key={tech}
-                className="px-2 py-1 text-xs bg-gray-800/50 text-gray-300 rounded-full border border-gray-700"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+            My <span className="gradient-text">Creative Work</span>
+          </h2>
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            Explore my portfolio of innovative projects built with modern technologies
+          </p>
+        </motion.div>
 
-          {/* Action buttons */}
-          <div className="flex gap-2 justify-center mt-3">
+        {/* Filters */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="flex flex-wrap justify-center gap-3 mb-12"
+        >
+          <div className="flex items-center gap-2 mr-4">
+            <Filter className="w-4 h-4 text-gray-500" />
+            <span className="text-sm text-gray-500">Filter:</span>
+          </div>
+          {[
+            { key: 'all', label: 'All Projects' },
+            { key: 'featured', label: 'Featured' },
+            { key: 'web', label: 'Frontend' },
+            { key: 'backend', label: 'Backend' }
+          ].map(({ key, label }) => (
+            <motion.button
+              key={key}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setFilter(key as FilterType)}
+              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${filter === key
+                ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg shadow-purple-500/25'
+                : 'glass-card text-gray-300 hover:text-white hover:!bg-white/10'
+                }`}
+            >
+              {label}
+            </motion.button>
+          ))}
+        </motion.div>
+
+        {/* Mobile: Horizontal scroll with arrows */}
+        <div className="md:hidden relative">
+          {/* Scroll buttons */}
+          <button
+            onClick={scrollLeft}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 glass-card !rounded-full flex items-center justify-center text-white"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={scrollRight}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 glass-card !rounded-full flex items-center justify-center text-white"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+
+          {/* Scrollable container */}
+          <div
+            ref={scrollRef}
+            className="flex gap-4 overflow-x-auto pb-4 px-8 mobile-scroll"
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project, index) => (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ delay: index * 0.05 }}
+                  className="w-[300px] flex-shrink-0"
+                >
+                  <ProjectCard
+                    project={project}
+                    isHovered={hoveredId === project.id}
+                    onHover={() => setHoveredId(project.id)}
+                    onLeave={() => setHoveredId(null)}
+                    isMobile
+                  />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Desktop: Grid layout */}
+        <div className="hidden md:block">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="grid grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project, index) => (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ delay: index * 0.05 }}
+                  layout
+                >
+                  <ProjectCard
+                    project={project}
+                    isHovered={hoveredId === project.id}
+                    onHover={() => setHoveredId(project.id)}
+                    onLeave={() => setHoveredId(null)}
+                  />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        </div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="text-center mt-16"
+        >
+          <p className="text-gray-400 mb-6">
+            Want to see more or discuss a project?
+          </p>
+          <motion.a
+            href="https://github.com/arpondark"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-lg font-semibold text-white shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-shadow"
+          >
+            <Github className="w-5 h-5" />
+            View All on GitHub
+          </motion.a>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// Dynamic background component
+function DynamicBackground() {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [mouseX, mouseY]);
+
+  const backgroundGradient = useMotionTemplate`radial-gradient(600px at ${mouseX}px ${mouseY}px, rgba(139, 92, 246, 0.08), transparent 60%)`;
+
+  return (
+    <motion.div
+      className="absolute inset-0 pointer-events-none"
+      style={{ background: backgroundGradient }}
+    />
+  );
+}
+
+// Project card component
+function ProjectCard({
+  project,
+  isHovered,
+  onHover,
+  onLeave,
+  isMobile = false
+}: {
+  project: typeof projects[0];
+  isHovered: boolean;
+  onHover: () => void;
+  onLeave: () => void;
+  isMobile?: boolean;
+}) {
+  const [imageError, setImageError] = useState(false);
+
+  return (
+    <motion.div
+      onMouseEnter={onHover}
+      onMouseLeave={onLeave}
+      className="group relative h-full"
+    >
+      <div className={`relative overflow-hidden rounded-2xl glass-card h-full transition-all duration-500 ${isHovered ? '!border-purple-500/30 shadow-xl shadow-purple-500/10' : ''
+        }`}>
+        {/* Project Image */}
+        <div className="relative aspect-video overflow-hidden">
+          <Image
+            src={imageError ? 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop' : project.image}
+            alt={project.title}
+            fill
+            sizes={isMobile ? "300px" : "(max-width: 768px) 50vw, 33vw"}
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
+            onError={() => setImageError(true)}
+          />
+
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+
+          {/* Featured badge */}
+          {project.featured && (
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="absolute top-3 left-3"
+            >
+              <span className="px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-semibold rounded-full shadow-lg">
+                Featured
+              </span>
+            </motion.div>
+          )}
+
+          {/* Hover action buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
+            className="absolute top-3 right-3 flex gap-2"
+          >
             <a
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 text-sm bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors border border-purple-500/20 cursor-pointer"
-              onClick={(e) => {
-                e.stopPropagation();
-                window.open(project.link, '_blank');
-              }}
+              className="p-2.5 glass-card !rounded-xl hover:!bg-white/20 transition-colors"
+              onClick={(e) => e.stopPropagation()}
             >
-              Live Demo
+              <ExternalLink className="w-4 h-4 text-white" />
             </a>
             <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 text-sm bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors border border-gray-700 cursor-pointer"
-              onClick={(e) => {
-                e.stopPropagation();
-                window.open(project.github, '_blank');
-              }}
+              className="p-2.5 glass-card !rounded-xl hover:!bg-white/20 transition-colors"
+              onClick={(e) => e.stopPropagation()}
             >
-              GitHub
+              <Github className="w-4 h-4 text-white" />
             </a>
+          </motion.div>
+        </div>
+
+        {/* Content */}
+        <div className="p-5">
+          {/* Category */}
+          <div className="flex items-center gap-2 mb-2">
+            <Code2 className="w-3.5 h-3.5 text-purple-400" />
+            <span className="text-xs text-purple-400 font-medium">{project.category}</span>
           </div>
-        </div>
-      </Html>
 
-      {/* Enhanced glow effect */}
-      <mesh position={[0, 0, -0.1]}>
-        <planeGeometry args={[4.2, 6.2]} />
-        <meshBasicMaterial
-          color="#4f46e5"
-          transparent
-          opacity={hovered ? 0.4 : isSelected ? 0.3 : 0.1}
-          side={THREE.DoubleSide}
-          blending={THREE.AdditiveBlending}
-        />
-      </mesh>
-    </primitive>
-  );
-}
+          {/* Title */}
+          <h3 className="text-lg font-bold text-white mb-2 group-hover:gradient-text transition-all line-clamp-1">
+            {project.title}
+          </h3>
 
-// Card View Component
-function ProjectCardView({ project }: { project: typeof projects[0] }) {
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
-
-  const handleLinkClick = (e: React.MouseEvent, url: string) => {
-    e.preventDefault();
-    e.stopPropagation();
-    window.open(url, '_blank');
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      whileHover={{ y: -5 }}
-      className="relative group cursor-pointer"
-    >
-      <div 
-        className="relative overflow-hidden rounded-xl bg-gray-900/50 backdrop-blur-sm border border-white/10"
-        onClick={() => window.open(project.link, '_blank')}
-      >
-        {/* Project Image */}
-        <div className="relative aspect-video overflow-hidden">
-          {!isImageLoaded && (
-            <div className="absolute inset-0 bg-gray-800 animate-pulse" />
-          )}
-          <Image
-            src={project.image}
-            alt={project.title}
-            width={600}
-            height={400}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-            onLoad={() => setIsImageLoaded(true)}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-        </div>
-
-        {/* Project Info */}
-        <div className="p-6">
-          <h3 className="text-xl font-bold text-purple-400 mb-2">{project.title}</h3>
-          <p className="text-gray-300 text-sm mb-4 line-clamp-2">{project.description}</p>
+          {/* Description */}
+          <p className="text-gray-400 text-sm mb-4 line-clamp-2">
+            {project.description}
+          </p>
 
           {/* Highlights */}
-          <div className="grid grid-cols-2 gap-2 mb-4">
+          <div className="flex flex-wrap gap-1.5 mb-4">
             {project.highlights.map((highlight) => (
               <span
                 key={highlight}
-                className="px-2 py-1 text-xs bg-purple-500/10 text-purple-300 rounded-full border border-purple-500/20"
+                className="px-2 py-0.5 text-xs bg-purple-500/10 text-purple-300 rounded-full border border-purple-500/20"
               >
                 {highlight}
               </span>
@@ -361,11 +487,11 @@ function ProjectCardView({ project }: { project: typeof projects[0] }) {
           </div>
 
           {/* Tech Stack */}
-          <div className="flex flex-wrap gap-1 mb-4">
-            {project.tech.map((tech) => (
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {project.tech.slice(0, 4).map((tech) => (
               <span
                 key={tech}
-                className="px-2 py-1 text-xs bg-gray-800/50 text-gray-300 rounded-full border border-gray-700"
+                className="px-2 py-0.5 text-xs bg-white/5 text-gray-400 rounded-full border border-white/10"
               >
                 {tech}
               </span>
@@ -373,168 +499,28 @@ function ProjectCardView({ project }: { project: typeof projects[0] }) {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
-            <button
-              onClick={(e) => handleLinkClick(e, project.link)}
-              className="flex-1 px-4 py-2 text-sm bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors border border-purple-500/20 text-center cursor-pointer"
+          <div className="flex gap-2">
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl text-sm font-medium hover:shadow-lg hover:shadow-purple-500/25 transition-shadow"
             >
-              Live Demo
-            </button>
-            <button
-              onClick={(e) => handleLinkClick(e, project.github)}
-              className="flex-1 px-4 py-2 text-sm bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors border border-gray-700 text-center cursor-pointer"
+              <Eye className="w-4 h-4" />
+              Demo
+            </a>
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-2 py-2.5 glass-card !rounded-xl text-white text-sm font-medium hover:!bg-white/10 transition-colors"
             >
-              GitHub
-            </button>
+              <Github className="w-4 h-4" />
+              Code
+            </a>
           </div>
         </div>
-
-        {/* Hover Effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
     </motion.div>
-  );
-}
-
-function Scene() {
-  const groupRef = useRef<THREE.Group>(null);
-  const [selectedProject, setSelectedProject] = useState<number | null>(null);
-
-  useFrame(() => {
-    if (groupRef.current && !selectedProject) {
-      groupRef.current.rotation.y += 0.003;
-    }
-  });
-
-  return (
-    <>
-      {/* Background */}
-      <Background />
-      <Particles />
-
-      {/* Enhanced lighting */}
-      <ambientLight intensity={0.4} />
-      <pointLight position={[10, 10, 10]} intensity={0.6} color="#4f46e5" />
-      <pointLight position={[-10, -10, -10]} intensity={0.6} color="#9333ea" />
-      <spotLight
-        position={[0, 20, 0]}
-        angle={0.3}
-        penumbra={1}
-        intensity={0.6}
-        color="#ffffff"
-      />
-
-      {/* Environment for better reflections */}
-      <Environment preset="city" />
-
-      {/* Project cards with selection handling */}
-      <primitive
-        object={new THREE.Group()}
-        ref={groupRef}
-      >
-        {projects.map((project, index) => (
-          <ProjectCard
-            key={project.title}
-            project={project}
-            index={index}
-            totalProjects={projects.length}
-            isSelected={selectedProject === index}
-            onSelect={() => setSelectedProject(selectedProject === index ? null : index)}
-          />
-        ))}
-      </primitive>
-    </>
-  );
-}
-
-export default function ProjectShowcase3D() {
-  const [viewMode, setViewMode] = useState<'3d' | 'cards'>('3d');
-
-  return (
-    <div className="w-full min-h-[800px] relative">
-      {/* View Mode Toggle */}
-      <div className="absolute top-4 right-4 z-10">
-        <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 flex gap-2">
-          <button
-            onClick={() => setViewMode('3d')}
-            className={`px-4 py-1 rounded-full text-sm transition-colors cursor-pointer ${
-              viewMode === '3d'
-                ? 'bg-purple-600 text-white'
-                : 'text-gray-300 hover:text-white'
-            }`}
-          >
-            3D View
-          </button>
-          <button
-            onClick={() => setViewMode('cards')}
-            className={`px-4 py-1 rounded-full text-sm transition-colors cursor-pointer ${
-              viewMode === 'cards'
-                ? 'bg-purple-600 text-white'
-                : 'text-gray-300 hover:text-white'
-            }`}
-          >
-            Card View
-          </button>
-        </div>
-      </div>
-
-      <AnimatePresence mode="wait">
-        {viewMode === '3d' ? (
-          <motion.div
-            key="3d"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="w-full h-[800px]"
-          >
-            <Canvas
-              camera={{ position: [0, 0, 20], fov: 45 }}
-              gl={{
-                antialias: true,
-                alpha: true,
-                powerPreference: "high-performance",
-              }}
-              dpr={[1, 2]}
-            >
-              <PresentationControls
-                global
-                rotation={[0, 0, 0]}
-                polar={[-Math.PI / 4, Math.PI / 4]}
-                azimuth={[-Math.PI / 4, Math.PI / 4]}
-                enabled={true}
-                snap={true}
-              >
-                <Scene />
-              </PresentationControls>
-            </Canvas>
-            
-            {/* Instructions overlay */}
-            <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-center">
-              <div className="bg-black/40 backdrop-blur-md px-6 py-3 rounded-full border border-white/10">
-                <p className="text-gray-300 text-sm">
-                  <span className="text-purple-400">Click</span> to focus • <span className="text-purple-400">Hover</span> to interact • <span className="text-purple-400">Drag</span> to rotate
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        ) : (
-          <motion.div
-            key="cards"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="container mx-auto px-4 py-8 relative"
-          >
-            {/* Background gradient for card view */}
-            <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900 -z-10" />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {projects.map((project) => (
-                <ProjectCardView key={project.title} project={project} />
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
   );
 }

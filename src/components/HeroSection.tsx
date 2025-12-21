@@ -39,7 +39,7 @@ export default function HeroSection() {
           {/* Social Links */}
           <div className="flex justify-center gap-6 mt-8">
             <a
-              href="https://github.com/arpondark"
+              href="https://github.com/mdshazanmahmudarpon"
               target="_blank"
               rel="noopener noreferrer"
               className="nav-link text-2xl hover:scale-110 transition-transform"
@@ -55,7 +55,7 @@ export default function HeroSection() {
               <FaLinkedin />
             </a>
             <a
-              href="https://www.facebook.com/arpon11241"
+              href="https://www.facebook.com/shazan.arpon007"
               target="_blank"
               rel="noopener noreferrer"
               className="nav-link text-2xl hover:scale-110 transition-transform"

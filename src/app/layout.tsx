@@ -1,24 +1,66 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import ClientSpaceBackground from "@/components/ClientSpaceBackground";
+import StructuredData from "@/components/StructuredData";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: '--font-inter',
+});
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: '--font-outfit',
+});
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#8b5cf6',
+  colorScheme: 'dark',
+}
 
 export const metadata: Metadata = {
-  title: "MD SHAZAN MAHMUD ARPON - Portfolio",
-  description: "Fullstack Developer | IoT Enthusiast | AI Passionate",
+  metadataBase: new URL('https://arpon007.me'),
+  title: "MD SHAZAN MAHMUD ARPON - Full Stack Developer Portfolio",
+  description: "Full Stack Developer specializing in Spring Boot, Laravel, React, and Next.js. Expert in PHP, Java, TypeScript, IoT systems, and AI applications. Building innovative web solutions with modern technologies.",
   keywords: [
     "MD SHAZAN MAHMUD ARPON",
-    "Fullstack Developer",
+    "Full Stack Developer",
     "Web Developer",
+    "Laravel Developer",
+    "PHP Developer",
+    "Spring Boot Developer",
+    "Java Developer",
+    "React Developer",
+    "Next.js Developer",
     "IoT Developer",
-    "UIU",
+    "MERN Stack Developer",
     "Bangladesh",
     "React",
     "Next.js",
     "Three.js",
+    "TypeScript",
+    "Node.js",
+    "Laravel",
+    "PHP",
+    "Spring Boot",
+    "Java",
+    "Portfolio",
+    "Software Engineer",
+    "Frontend Developer",
+    "Backend Developer"
   ],
+  authors: [{ name: "MD SHAZAN MAHMUD ARPON", url: "https://arpon007.me" }],
+  creator: "MD SHAZAN MAHMUD ARPON",
+  publisher: "MD SHAZAN MAHMUD ARPON",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   icons: {
     icon: [
       {
@@ -34,49 +76,40 @@ export const metadata: Metadata = {
     },
   },
   manifest: '/manifest.json',
-  themeColor: '#4f46e5',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-  },
-  // Open Graph metadata
   openGraph: {
-    type: 'website',
+    type: 'profile',
     locale: 'en_US',
     url: 'https://arpon007.me',
     siteName: "MD SHAZAN MAHMUD ARPON - Portfolio",
-    title: "MD SHAZAN MAHMUD ARPON - Portfolio",
-    description: "Fullstack Developer | IoT Enthusiast | AI Passionate | Building innovative web solutions with modern technologies",
+    title: "MD SHAZAN MAHMUD ARPON - Full Stack Developer Portfolio",
+    description: "Full Stack Developer specializing in Spring Boot, Laravel, React, and Next.js. Expert in PHP, Java, TypeScript, IoT systems, and AI applications.",
     images: [
       {
-        url: '/og-image.png',
+        url: 'https://arpon007.me/og-image.png',
         width: 1200,
         height: 630,
         alt: 'MD SHAZAN MAHMUD ARPON - Portfolio Preview',
       }
     ],
   },
-  // Additional metadata for better social sharing
   alternates: {
     canonical: 'https://arpon007.me',
   },
-  // LinkedIn specific metadata
   other: {
     'linkedin:card': 'summary_large_image',
-    'linkedin:title': 'MD SHAZAN MAHMUD ARPON - Portfolio',
-    'linkedin:description': 'Fullstack Developer | IoT Enthusiast | AI Passionate | Building innovative web solutions with modern technologies',
+    'linkedin:title': 'MD SHAZAN MAHMUD ARPON - Full Stack Developer Portfolio',
+    'linkedin:description': 'Full Stack Developer specializing in Spring Boot, Laravel, React, and Next.js. Expert in PHP, Java, TypeScript, IoT systems, and AI applications.',
     'linkedin:image': 'https://arpon007.me/og-image.png',
-    'linkedin:site': '@your-linkedin-handle', // Add your LinkedIn handle
-    'linkedin:creator': '@your-linkedin-handle', // Add your LinkedIn handle
+    'linkedin:profile': 'https://www.linkedin.com/in/md-shazan-mahmud-arpon/',
+    'linkedin:author': 'https://www.linkedin.com/in/md-shazan-mahmud-arpon/',
   },
   twitter: {
     card: 'summary_large_image',
-    title: "MD SHAZAN MAHMUD ARPON - Portfolio",
-    description: "Fullstack Developer | IoT Enthusiast | AI Passionate | Building innovative web solutions with modern technologies",
-    images: ['/og-image.png'],
-    creator: '@arpondark',
-    site: '@arpondark',
+    title: "MD SHAZAN MAHMUD ARPON - Full Stack Developer Portfolio",
+    description: "Full Stack Developer specializing in Spring Boot, Laravel, React, and Next.js. Expert in PHP, Java, TypeScript, IoT systems, and AI applications.",
+    images: ['https://arpon007.me/og-image.png'],
+    creator: '@mdshazanmahmudarpon',
+    site: '@mdshazanmahmudarpon',
   },
   robots: {
     index: true,
@@ -100,11 +133,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} bg-black text-white min-h-screen relative`}>
+    <html lang="en" className={`scroll-smooth ${inter.variable} ${outfit.variable}`}>
+      <head>
+        <StructuredData />
+      </head>
+      <body className={`${outfit.className} bg-black text-white min-h-screen antialiased`}>
         {/* 3D Space Background */}
         <ClientSpaceBackground />
-        
+
         {/* Main Content */}
         <div className="relative z-10">
           {children}

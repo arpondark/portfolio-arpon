@@ -1,139 +1,111 @@
-# 🚀 Arpon's Portfolio
+# Portfolio Website
 
-[Preview Link](https://portfolio-arpon.vercel.app)
+A modern, responsive portfolio website built with Next.js, featuring 3D animations, blog functionality, and admin dashboard.
 
-> A modern, interactive portfolio website showcasing my skills, projects, and experience
+## 🚀 Live Demo
 
-[![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
-[![Three.js](https://img.shields.io/badge/Three.js-Latest-black?style=flat-square&logo=three.js)](https://threejs.org/)
+- **GitHub Pages**: [https://arpondark.github.io](https://arpondark.github.io)
+- **Vercel**: [Deploy to Vercel](https://vercel.com/new)
 
 ## ✨ Features
 
-- 🎨 **Modern Design** - Clean, responsive interface with smooth animations
-- 🌌 **3D Backgrounds** - Interactive space-themed 3D scenes using Three.js
-- 💼 **Project Showcase** - Dynamic project displays with 3D elements
-- 🛠️ **Skills Section** - Visual representation of technical skills with animated logos
-- 📱 **Responsive** - Optimized for all devices and screen sizes
-- ⚡ **Performance** - Fast loading with Next.js optimization
-- 🎯 **Interactive** - Engaging user experience with floating elements
+- 🎨 Modern 3D animations with Three.js
+- 📱 Fully responsive design
+- 📝 Blog system with admin dashboard
+- 🔐 Authentication system
+- 🎯 SEO optimized
+- 🌙 Dark theme support
+- ⚡ Fast performance with Next.js
 
 ## 🛠️ Tech Stack
 
-- **Framework:** Next.js 14 with App Router
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS
-- **3D Graphics:** Three.js
-- **Fonts:** Geist (Vercel's font family)
-- **Deployment:** Vercel
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **Styling**: Tailwind CSS
+- **3D Graphics**: Three.js, React Three Fiber
+- **Database**: MongoDB
+- **Authentication**: JWT
+- **Image Storage**: Cloudinary
+- **Deployment**: GitHub Pages, Vercel
 
 ## 🚀 Quick Start
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/arpondark/portfolio-arpon.git
-   cd portfolio-arpon
-   ```
+### Prerequisites
+- Node.js 20+
+- MongoDB database
+- Cloudinary account (for image storage)
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   # or
-   yarn install
-   # or
-   pnpm install
-   ```
+### Installation
 
-3. **Start the development server**
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   # or
-   pnpm dev
-   ```
-
-4. **Open your browser**
-   
-   Navigate to [http://localhost:3000](http://localhost:3000) to see the portfolio in action! 🎉
-
-## 📁 Project Structure
-
-```
-portfolio-arpon/
-├── src/
-│   ├── app/                 # Next.js App Router pages
-│   └── components/          # Reusable React components
-├── public/                  # Static assets
-│   ├── skills/             # Skill logos and icons
-│   └── tech/               # Technology logos
-├── components/             # Additional components
-└── scripts/                # Utility scripts
-```
-
-## 🎨 Components Overview
-
-- **HeroSection** - Main landing section with 3D background
-- **AboutSection** - Personal introduction and background
-- **SkillsSection** - Animated skill logos and proficiencies
-- **ProjectsSection** - Showcase of featured projects
-- **SpaceBackground3D** - Interactive 3D space scene
-- **FloatingLogos** - Animated floating tech logos
-
-## 🎯 Customization
-
-To customize the portfolio for your own use:
-
-1. **Update content** in `src/app/page.tsx`
-2. **Modify components** in `src/components/`
-3. **Add your projects** to the ProjectsSection
-4. **Replace images** in the `public/` directory
-5. **Update skills** in the SkillsSection component
-
-## 📦 Available Scripts
-
+1. Clone the repository
 ```bash
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run start        # Start production server
-npm run lint         # Run ESLint
+git clone https://github.com/arpondark/arpondark.github.io.git
+cd arpondark.github.io
 ```
 
-## 🌐 Deployment
+2. Install dependencies
+```bash
+npm install
+```
 
-The easiest way to deploy this portfolio is using [Vercel](https://vercel.com):
+3. Set up environment variables
+```bash
+cp .env.example .env.local
+# Edit .env.local with your configuration
+```
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/arpondark/portfolio-arpon)
+4. Run the development server
+```bash
+npm run dev
+```
 
-Alternatively, you can deploy to:
-- **Netlify** - Connect your GitHub repository
-- **GitHub Pages** - Using `next export`
-- **Railway** - One-click deployment
-- **Heroku** - Using the Next.js buildpack
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## 🤝 Contributing
+## 📦 Deployment
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/your-username/portfolio-arpon/issues).
+This project is configured for deployment on both GitHub Pages and Vercel:
+
+### GitHub Pages
+- Automatic deployment via GitHub Actions
+- Static site generation
+- Custom domain support
+
+### Vercel
+- Zero-config deployment
+- Serverless functions support
+- Automatic HTTPS
+
+For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
+
+## 📝 Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run deploy:github` - Deploy to GitHub Pages
+- `npm run deploy:vercel` - Deploy to Vercel
+
+
+
+
 
 ## 📄 License
 
-This project is [MIT](LICENSE) licensed.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👨‍💻 Author
+
+**Arpon Dark**
+- GitHub: [@arpondark](https://github.com/arpondark)
+- Website: [arpon007.me](https://arpon007.me)
 
 ## 🙏 Acknowledgments
 
-- [Next.js](https://nextjs.org/) for the amazing React framework
-- [Three.js](https://threejs.org/) for 3D graphics capabilities
-- [Tailwind CSS](https://tailwindcss.com/) for utility-first styling
-- [Vercel](https://vercel.com/) for hosting and deployment
+- [Next.js](https://nextjs.org/) for the amazing framework
+- [Three.js](https://threejs.org/) for 3D graphics
+- [Tailwind CSS](https://tailwindcss.com/) for styling
+- [Vercel](https://vercel.com/) for deployment platform
 
 ---
 
-<div align="center">
-  <p>Made with ❤️ by Arpon</p>
-  <p>
-    <a href="https://github.com/arpondark">GitHub</a> •
-    <a href="https://www.linkedin.com/in/md-shazan-mahmud-arpon">LinkedIn</a> •
-    <a href="https://portfolio-arpon.vercel.app/">Portfolio</a>
-  </p>
-</div>
+⭐ Star this repository if you found it helpful!
