@@ -77,10 +77,10 @@ export default function HeroEnhanced() {
         style={{ opacity }}
       >
         {/* Desktop Layout: Two columns */}
-        <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-16">
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
 
           {/* Left: Text Content */}
-          <div className="flex-1 text-center lg:text-left">
+          <div className="flex-1 text-center lg:text-left mt-8 lg:mt-0">
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -205,7 +205,7 @@ export default function HeroEnhanced() {
                 className="absolute -top-4 -right-4 glass-card !rounded-xl px-3 py-2 flex items-center gap-2"
               >
                 <Code2 className="w-4 h-4 text-[var(--accent-primary)]" />
-                <span className="text-xs font-medium text-[var(--text-primary)]">3+ Years</span>
+                <span className="text-xs font-medium text-[var(--text-primary)]">2+ Years</span>
               </motion.div>
 
               <motion.div

@@ -143,6 +143,11 @@ export default function RootLayout({
                   var theme = localStorage.getItem('portfolio-theme');
                   if (theme === 'light') {
                     document.documentElement.classList.remove('dark');
+                  } else if (!theme) {
+                    var hour = new Date().getHours();
+                    if (hour >= 6 && hour < 18) {
+                      document.documentElement.classList.remove('dark');
+                    }
                   }
                 } catch(e) {}
               })();

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,16 +12,16 @@
   --bg-primary: #fafafa;
   --bg-secondary: #ffffff;
   --bg-tertiary: #f3f4f6;
-  
+
   --accent-primary: #7c3aed;
   --accent-secondary: #db2777;
   --accent-tertiary: #0891b2;
-  
+
   --glass-bg: rgba(255, 255, 255, 0.7);
   --glass-bg-hover: rgba(255, 255, 255, 0.85);
   --glass-border: rgba(0, 0, 0, 0.08);
   --glass-border-hover: rgba(0, 0, 0, 0.15);
-  
+
   --text-primary: #111827;
   --text-secondary: #4b5563;
   --text-muted: #9ca3af;
@@ -40,16 +41,16 @@
   --bg-primary: #0a0a0f;
   --bg-secondary: #111118;
   --bg-tertiary: #1a1a24;
-  
+
   --accent-primary: #8b5cf6;
   --accent-secondary: #ec4899;
   --accent-tertiary: #06b6d4;
-  
+
   --glass-bg: rgba(255, 255, 255, 0.04);
   --glass-bg-hover: rgba(255, 255, 255, 0.08);
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-border-hover: rgba(255, 255, 255, 0.16);
-  
+
   --text-primary: #f9fafb;
   --text-secondary: #d1d5db;
   --text-muted: #6b7280;
@@ -85,7 +86,8 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-html, body {
+html,
+body {
   overscroll-behavior: none;
 }
 
@@ -128,13 +130,11 @@ html, body {
     inset: 0;
     border-radius: 20px;
     padding: 1px;
-    background: linear-gradient(
-      135deg,
-      var(--accent-primary),
-      var(--accent-secondary),
-      var(--accent-tertiary),
-      var(--accent-primary)
-    );
+    background: linear-gradient(135deg,
+        var(--accent-primary),
+        var(--accent-secondary),
+        var(--accent-tertiary),
+        var(--accent-primary));
     background-size: 300% 300%;
     animation: gradient-rotate 8s ease infinite;
     -webkit-mask:
@@ -147,12 +147,10 @@ html, body {
 
   /* Gradient Text */
   .gradient-text {
-    background: linear-gradient(
-      135deg,
-      var(--accent-primary) 0%,
-      var(--accent-secondary) 50%,
-      var(--accent-tertiary) 100%
-    );
+    background: linear-gradient(135deg,
+        var(--accent-primary) 0%,
+        var(--accent-secondary) 50%,
+        var(--accent-tertiary) 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -204,26 +202,51 @@ html, body {
    ============================================ */
 
 @keyframes gradient-rotate {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 @keyframes pulse-glow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 20px var(--glow-purple);
     opacity: 0.5;
   }
+
   50% {
     box-shadow: 0 0 40px var(--glow-purple), 0 0 60px var(--glow-pink);
     opacity: 0.8;
@@ -291,7 +314,7 @@ html, body {
   display: none;
 }
 
-.mobile-scroll > * {
+.mobile-scroll>* {
   scroll-snap-align: start;
   flex-shrink: 0;
 }
@@ -301,6 +324,7 @@ html, body {
    ============================================ */
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -324,4 +348,14 @@ html, body {
   border-radius: 9999px;
   overflow: hidden;
   background: var(--bg-primary);
+}
+
+/* ============================================
+   FUNNEL DISPLAY FONT
+   ============================================ */
+body {
+  font-family: "Funnel Display", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }

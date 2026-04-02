@@ -33,7 +33,10 @@ export default function ThemeProvider({
             setTheme(stored);
             document.documentElement.classList.toggle("dark", stored === "dark");
         } else {
-            document.documentElement.classList.add("dark");
+            const hour = new Date().getHours();
+            const isDayTime = hour >= 6 && hour < 18;
+            setTheme(isDayTime ? "light" : "dark");
+            document.documentElement.classList.toggle("dark", !isDayTime);
         }
     }, []);
 

@@ -120,8 +120,10 @@ export default function Navbar() {
 
             {/* Download CV */}
             <motion.a
-              href="/cv/resume.pdf"
-              download
+              href="/cv/MD._SHAZAN_MAHMUD_ARPON_.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              download="MD_SHAZAN_MAHMUD_ARPON_CV.pdf"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="ml-2 px-4 py-2.5 glass-card !rounded-full text-sm font-medium text-[var(--text-primary)] flex items-center gap-2 hover:!border-[var(--accent-primary)]/30 transition-all"
@@ -212,8 +214,10 @@ export default function Navbar() {
 
                 {/* Download CV - Mobile */}
                 <motion.a
-                  href="/cv/resume.pdf"
-                  download
+                  href="/cv/MD._SHAZAN_MAHMUD_ARPON_.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download="MD_SHAZAN_MAHMUD_ARPON_CV.pdf"
                   onClick={() => setIsMobileMenuOpen(false)}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
