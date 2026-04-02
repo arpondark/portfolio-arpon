@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Outfit } from "next/font/google";
+import { Inter, Funnel_Display } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
 import StructuredData from "@/components/StructuredData";
@@ -9,9 +9,10 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-const outfit = Outfit({
+const funnelDisplay = Funnel_Display({
   subsets: ["latin"],
-  variable: '--font-outfit',
+  variable: '--font-funnel',
+  weight: ['300', '400', '500', '600', '700', '800'],
 });
 
 export const viewport: Viewport = {
@@ -131,7 +132,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`scroll-smooth dark ${inter.variable} ${outfit.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`scroll-smooth dark ${inter.variable} ${funnelDisplay.variable}`} suppressHydrationWarning>
       <head>
         {/* Prevent flash: set dark mode before paint */}
         <script
@@ -150,7 +151,7 @@ export default function RootLayout({
         />
         <StructuredData />
       </head>
-      <body className={`${outfit.className} min-h-screen antialiased bg-[var(--bg-primary)] text-[var(--text-primary)]`}>
+      <body className={`${funnelDisplay.className} min-h-screen antialiased bg-[var(--bg-primary)] text-[var(--text-primary)]`}>
         <ThemeProvider>
           {children}
         </ThemeProvider>

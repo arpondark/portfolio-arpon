@@ -89,16 +89,15 @@ export default function AboutSection() {
             >
               <div className="glass-card-neon p-8 md:p-10 h-full">
                 <p className="text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed mb-6">
-                  I&apos;m a passionate <span className="text-[var(--accent-primary)] font-medium">Full Stack Developer</span> with a keen interest in building innovative solutions.
-                  My journey in tech has led me to master various domains including
-                  <span className="text-[var(--accent-secondary)] font-medium"> Web Development</span>,
+                  I&apos;m a passionate <span className="text-green-600 dark:text-green-400 font-medium">Spring Boot & Java Developer</span> with deep expertise in building scalable, enterprise-grade applications.
+                  My journey in tech spans across
+                  <span className="text-[var(--accent-primary)] font-medium"> Full Stack Development</span>,
                   <span className="text-[var(--accent-tertiary)] font-medium"> IoT Systems</span>, and
-                  <span className="text-green-600 dark:text-green-400 font-medium"> AI Applications</span>.
+                  <span className="text-[var(--accent-secondary)] font-medium"> AI Applications</span>.
                 </p>
 
                 <p className="text-[var(--text-secondary)] leading-relaxed mb-6">
-                  I specialize in crafting exceptional digital experiences using cutting-edge technologies.
-                  For backend, I work with <span className="text-green-600 dark:text-green-400">Spring Boot</span>, <span className="text-yellow-600 dark:text-yellow-400">Express.js</span>, <span className="text-red-600 dark:text-red-400">NestJS</span>, and <span className="text-orange-600 dark:text-orange-400">Laravel</span>.
+                  I specialize in building robust backend systems with <span className="text-green-600 dark:text-green-400 font-medium">Spring Boot</span> and <span className="text-orange-600 dark:text-orange-400 font-medium">Java</span>, designing microservices architectures, and implementing RESTful APIs.
                   For frontend, I create beautiful interfaces with <span className="text-blue-600 dark:text-blue-400">React</span> and <span className="text-[var(--text-primary)] font-medium">Next.js</span>.
                 </p>
 

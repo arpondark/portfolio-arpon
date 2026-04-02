@@ -7,9 +7,9 @@ import Image from 'next/image'
 import { Github, Linkedin, Mail, Code2, Sparkles, Download } from 'lucide-react'
 
 const roles = [
+  'Spring Boot Developer',
+  'Java Developer',
   'Full Stack Developer',
-  'Java & Spring Boot Developer',
-  'Laravel & PHP Developer',
   'MERN Stack Developer',
   'IoT & Embedded Developer',
   'Game Developer'
@@ -125,10 +125,10 @@ export default function HeroEnhanced() {
               transition={{ delay: 0.5 }}
               className="text-lg text-[var(--text-secondary)] max-w-lg mx-auto lg:mx-0 mb-8 leading-relaxed"
             >
-              Passionate about crafting exceptional digital experiences with cutting-edge technologies.
-              Specializing in <span className="text-[var(--accent-primary)] font-medium">Full Stack Development</span>,
-              <span className="text-[var(--accent-secondary)] font-medium"> IoT</span>, and
-              <span className="text-[var(--accent-tertiary)] font-medium"> AI Solutions</span>.
+              Passionate about building robust backend systems and exceptional digital experiences.
+              Specializing in <span className="text-[var(--accent-primary)] font-medium">Spring Boot & Java</span>,
+              <span className="text-[var(--accent-secondary)] font-medium"> Full Stack Development</span>, and
+              <span className="text-[var(--accent-tertiary)] font-medium"> IoT & AI Solutions</span>.
             </motion.p>
 
             {/* CTA Buttons */}
