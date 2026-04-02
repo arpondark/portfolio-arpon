@@ -8,11 +8,7 @@ import ScrollToTop from '@/components/ScrollToTop';
 
 export default function Home() {
   return (
-    <div className="bg-black min-h-screen">
-      {/* Background layers */}
-      <div className="fixed inset-0 bg-mesh-gradient pointer-events-none" />
-      <div className="fixed inset-0 bg-grid opacity-20 pointer-events-none" />
-
+    <div className="min-h-screen bg-[var(--bg-primary)] transition-colors duration-300">
       {/* Content */}
       <div className="relative z-10">
         <Navbar />

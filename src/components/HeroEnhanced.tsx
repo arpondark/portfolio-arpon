@@ -1,9 +1,10 @@
 'use client'
 
-import { motion, useMotionTemplate, useMotionValue, useScroll, useTransform } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Github, Linkedin, Mail, Code2, Sparkles } from 'lucide-react'
+import Image from 'next/image'
+import { Github, Linkedin, Mail, Code2, Sparkles, Download } from 'lucide-react'
 
 const roles = [
   'Full Stack Developer',
@@ -14,110 +15,6 @@ const roles = [
   'Game Developer'
 ]
 
-// Floating particles component
-function FloatingParticles() {
-  const particles = Array.from({ length: 50 }, (_, i) => ({
-    id: i,
-    x: (i * 7) % 100,
-    y: (i * 11) % 100,
-    size: 2 + (i % 4),
-    duration: 15 + (i % 20),
-    delay: (i * 0.5) % 10
-  }))
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          className="absolute rounded-full"
-          style={{
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-            width: p.size,
-            height: p.size,
-            background: `radial-gradient(circle, rgba(139, 92, 246, 0.6) 0%, rgba(236, 72, 153, 0.3) 100%)`,
-          }}
-          animate={{
-            y: [0, -100, 0],
-            x: [0, 30, 0],
-            opacity: [0.2, 0.8, 0.2],
-            scale: [1, 1.5, 1],
-          }}
-          transition={{
-            duration: p.duration,
-            repeat: Infinity,
-            delay: p.delay,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-    </div>
-  )
-}
-
-// Animated orbs background
-function AnimatedOrbs() {
-  return (
-    <div className="absolute inset-0 overflow-hidden">
-      {/* Large purple orb */}
-      <motion.div
-        className="absolute -top-1/4 -right-1/4 w-[600px] h-[600px] rounded-full"
-        style={{
-          background: 'radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%)',
-          filter: 'blur(60px)',
-        }}
-        animate={{
-          x: [0, 100, 0],
-          y: [0, 50, 0],
-          scale: [1, 1.2, 1],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      {/* Pink orb */}
-      <motion.div
-        className="absolute -bottom-1/4 -left-1/4 w-[500px] h-[500px] rounded-full"
-        style={{
-          background: 'radial-gradient(circle, rgba(236, 72, 153, 0.25) 0%, transparent 70%)',
-          filter: 'blur(60px)',
-        }}
-        animate={{
-          x: [0, -80, 0],
-          y: [0, -60, 0],
-          scale: [1, 1.3, 1],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      {/* Cyan accent */}
-      <motion.div
-        className="absolute top-1/3 left-1/4 w-[300px] h-[300px] rounded-full"
-        style={{
-          background: 'radial-gradient(circle, rgba(6, 182, 212, 0.2) 0%, transparent 70%)',
-          filter: 'blur(40px)',
-        }}
-        animate={{
-          x: [0, 60, -40, 0],
-          y: [0, -40, 60, 0],
-        }}
-        transition={{
-          duration: 18,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-    </div>
-  )
-}
-
-// Typing animation component
 function TypeWriter({ words }: { words: string[] }) {
   const [currentIndex, setCurrentIndex] = useState(0)
 
@@ -143,224 +40,183 @@ function TypeWriter({ words }: { words: string[] }) {
 }
 
 export default function HeroEnhanced() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-
   const { scrollYProgress } = useScroll()
-  const parallaxY = useTransform(scrollYProgress, [0, 1], [0, -200])
   const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0])
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseX.set(e.clientX)
-      mouseY.set(e.clientY)
-    }
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [mouseX, mouseY])
-
-  const backgroundGradient = useMotionTemplate`radial-gradient(800px at ${mouseX}px ${mouseY}px, rgba(139, 92, 246, 0.12), transparent 60%)`
-
   return (
-    <section
-      ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
-    >
-      {/* Base gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-purple-950/20 to-black" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--bg-primary)]" />
 
-      {/* Grid pattern */}
-      <div className="absolute inset-0 bg-grid opacity-30" />
-
-      {/* Animated orbs */}
-      <AnimatedOrbs />
-
-      {/* Floating particles */}
-      <FloatingParticles />
-
-      {/* Mouse follow gradient */}
+      {/* Decorative gradient blobs */}
       <motion.div
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: backgroundGradient }}
+        className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full opacity-30 dark:opacity-20"
+        style={{
+          background: 'radial-gradient(circle, var(--accent-primary) 0%, transparent 70%)',
+          filter: 'blur(80px)',
+        }}
+        animate={{ x: [0, 60, 0], y: [0, 30, 0], scale: [1, 1.1, 1] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full opacity-30 dark:opacity-20"
+        style={{
+          background: 'radial-gradient(circle, var(--accent-secondary) 0%, transparent 70%)',
+          filter: 'blur(80px)',
+        }}
+        animate={{ x: [0, -40, 0], y: [0, -30, 0], scale: [1, 1.15, 1] }}
+        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Content with parallax */}
+      {/* Grid */}
+      <div className="absolute inset-0 bg-grid opacity-40 dark:opacity-20" />
+
+      {/* Content */}
       <motion.div
-        className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-        style={{ y: parallaxY, opacity }}
+        className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20"
+        style={{ opacity }}
       >
-        {/* Mobile Layout */}
-        <div className="md:hidden text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            className="glass-card-neon p-8 mx-4"
-          >
+        {/* Desktop Layout: Two columns */}
+        <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-16">
+
+          {/* Left: Text Content */}
+          <div className="flex-1 text-center lg:text-left">
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 mb-6"
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 mb-6"
             >
-              <Sparkles className="w-4 h-4 text-purple-400" />
-              <span className="text-sm text-purple-300">Available for hire</span>
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              </span>
+              <span className="text-sm text-[var(--accent-primary)]">Available for new opportunities</span>
             </motion.div>
 
-            <h1 className="text-4xl font-bold text-white mb-4">
+            {/* Name */}
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-[var(--text-primary)] mb-4 leading-tight"
+            >
               Hi, I&apos;m{' '}
-              <span className="gradient-text block mt-2">ARPON</span>
-            </h1>
+              <span className="gradient-text-glow block sm:inline">
+                ARPON
+              </span>
+            </motion.h1>
 
-            <div className="text-xl text-gray-300 mb-6 min-h-[32px]">
+            {/* Role Typewriter */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="text-xl sm:text-2xl lg:text-3xl font-medium text-[var(--accent-primary)] mb-6 min-h-[40px]"
+            >
               <TypeWriter words={roles} />
-            </div>
+            </motion.div>
 
-            <p className="text-gray-400 mb-8 text-sm leading-relaxed">
-              Crafting exceptional digital experiences with cutting-edge technologies
-            </p>
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="text-lg text-[var(--text-secondary)] max-w-lg mx-auto lg:mx-0 mb-8 leading-relaxed"
+            >
+              Passionate about crafting exceptional digital experiences with cutting-edge technologies.
+              Specializing in <span className="text-[var(--accent-primary)] font-medium">Full Stack Development</span>,
+              <span className="text-[var(--accent-secondary)] font-medium"> IoT</span>, and
+              <span className="text-[var(--accent-tertiary)] font-medium"> AI Solutions</span>.
+            </motion.p>
 
-            <div className="flex flex-col gap-3">
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center mb-8"
+            >
               <Link
                 href="#projects"
-                className="w-full py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl font-semibold text-white shadow-lg shadow-purple-500/25"
+                className="group px-7 py-3.5 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] text-white rounded-full font-semibold text-base transition-all duration-300 hover:shadow-xl hover:shadow-[var(--glow-purple)] flex items-center gap-3"
               >
-                View My Work
+                <span>Explore My Work</span>
+                <motion.span
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  →
+                </motion.span>
               </Link>
+
               <Link
                 href="#contact"
-                className="w-full py-4 glass-card !rounded-2xl font-medium text-white"
+                className="px-7 py-3.5 glass-card !rounded-full font-semibold text-base text-[var(--text-primary)] hover:!bg-[var(--glass-bg-hover)] transition-all duration-300 flex items-center gap-2"
               >
-                Contact Me
+                <Mail className="w-5 h-5" />
+                Get In Touch
               </Link>
-            </div>
+            </motion.div>
 
-            {/* Social Icons */}
-            <div className="flex justify-center gap-4 mt-8">
-              <SocialLink href="https://github.com/arpondark" icon={<Github className="w-5 h-5" />} />
-              <SocialLink href="https://linkedin.com/in/md-shazan-mahmud-arpon" icon={<Linkedin className="w-5 h-5" />} />
-              <SocialLink href="mailto:arponarpon007@gmail.com" icon={<Mail className="w-5 h-5" />} />
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Desktop Layout */}
-        <div className="hidden md:block text-center">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 mb-8"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-            </span>
-            <span className="text-sm text-gray-300">Available for new opportunities</span>
-          </motion.div>
-
-          {/* Main heading */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-6xl lg:text-8xl font-bold text-white mb-6"
-          >
-            Hi, I&apos;m{' '}
-            <span className="gradient-text-glow">
-              MD SHAZAN MAHMUD ARPON
-            </span>
-          </motion.h1>
-
-          {/* Roles */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex flex-wrap justify-center gap-3 mb-8"
-          >
-            {roles.map((role, index) => (
-              <motion.span
-                key={role}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4 + index * 0.1, type: "spring" }}
-                whileHover={{ scale: 1.05, y: -2 }}
-                className="px-5 py-2.5 glass-card !rounded-full text-sm md:text-base font-medium text-gray-300 hover:text-white hover:!border-purple-500/30 transition-all cursor-default"
-              >
-                <Code2 className="w-4 h-4 inline mr-2 text-purple-400" />
-                {role}
-              </motion.span>
-            ))}
-          </motion.div>
-
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="text-xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed"
-          >
-            Passionate about crafting exceptional digital experiences with cutting-edge technologies.
-            Specializing in <span className="text-purple-400">Full Stack Development</span>,
-            <span className="text-pink-400"> IoT</span>, and
-            <span className="text-cyan-400"> AI Solutions</span>.
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
-          >
-            <Link
-              href="#projects"
-              className="group px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-semibold text-lg transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/25 flex items-center gap-3"
+            {/* Social Links */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.9 }}
+              className="flex gap-3 justify-center lg:justify-start"
             >
-              <span>Explore My Work</span>
-              <motion.span
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                →
-              </motion.span>
-            </Link>
+              <SocialLink href="https://github.com/arpondark" icon={<Github className="w-5 h-5" />} label="GitHub" />
+              <SocialLink href="https://linkedin.com/in/md-shazan-mahmud-arpon" icon={<Linkedin className="w-5 h-5" />} label="LinkedIn" />
+              <SocialLink href="mailto:arponarpon007@gmail.com" icon={<Mail className="w-5 h-5" />} label="Email" />
+            </motion.div>
+          </div>
 
-            <Link
-              href="#contact"
-              className="px-8 py-4 glass-card !rounded-full font-semibold text-lg text-white hover:!bg-white/10 transition-all duration-300 flex items-center gap-2"
-            >
-              <Mail className="w-5 h-5" />
-              Get In Touch
-            </Link>
-          </motion.div>
-
-          {/* Social Links */}
+          {/* Right: Profile Image */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2 }}
-            className="flex gap-4 justify-center"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 100 }}
+            className="flex-shrink-0"
           >
-            <SocialLink
-              href="https://github.com/arpondark"
-              icon={<Github className="w-6 h-6" />}
-              label="GitHub"
-            />
-            <SocialLink
-              href="https://linkedin.com/in/md-shazan-mahmud-arpon"
-              icon={<Linkedin className="w-6 h-6" />}
-              label="LinkedIn"
-            />
-            <SocialLink
-              href="mailto:arponarpon007@gmail.com"
-              icon={<Mail className="w-6 h-6" />}
-              label="Email"
-            />
+            <div className="relative">
+              {/* Glow behind image */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[var(--accent-primary)] via-[var(--accent-secondary)] to-[var(--accent-tertiary)] opacity-30 blur-3xl scale-110" />
+
+              {/* Profile ring */}
+              <div className="relative profile-ring w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96">
+                <div className="profile-ring-inner w-full h-full">
+                  <Image
+                    src="/profile.jpg"
+                    alt="MD SHAZAN MAHMUD ARPON"
+                    fill
+                    sizes="(max-width: 640px) 256px, (max-width: 1024px) 288px, (max-width: 1280px) 320px, 384px"
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+              </div>
+
+              {/* Floating badges */}
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-4 -right-4 glass-card !rounded-xl px-3 py-2 flex items-center gap-2"
+              >
+                <Code2 className="w-4 h-4 text-[var(--accent-primary)]" />
+                <span className="text-xs font-medium text-[var(--text-primary)]">3+ Years</span>
+              </motion.div>
+
+              <motion.div
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                className="absolute -bottom-4 -left-4 glass-card !rounded-xl px-3 py-2 flex items-center gap-2"
+              >
+                <Sparkles className="w-4 h-4 text-[var(--accent-secondary)]" />
+                <span className="text-xs font-medium text-[var(--text-primary)]">Full Stack</span>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </motion.div>
@@ -375,14 +231,14 @@ export default function HeroEnhanced() {
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="flex flex-col items-center gap-2 text-gray-400"
+          className="flex flex-col items-center gap-2 text-[var(--text-muted)]"
         >
           <span className="text-sm hidden md:block">Scroll to explore</span>
-          <div className="w-6 h-10 rounded-full border-2 border-gray-600 flex items-start justify-center p-1">
+          <div className="w-6 h-10 rounded-full border-2 border-[var(--text-muted)]/40 flex items-start justify-center p-1">
             <motion.div
               animate={{ y: [0, 12, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-1.5 h-3 rounded-full bg-gradient-to-b from-purple-400 to-pink-500"
+              className="w-1.5 h-3 rounded-full bg-gradient-to-b from-[var(--accent-primary)] to-[var(--accent-secondary)]"
             />
           </div>
         </motion.div>
@@ -399,16 +255,14 @@ function SocialLink({ href, icon, label }: { href: string; icon: React.ReactNode
       rel="noopener noreferrer"
       whileHover={{ scale: 1.1, y: -2 }}
       whileTap={{ scale: 0.95 }}
-      className="group relative p-3 glass-card !rounded-full text-gray-400 hover:text-white hover:!border-purple-500/30 transition-all duration-300"
+      className="group relative p-3 glass-card !rounded-full text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-all duration-300"
     >
       {icon}
       {label && (
-        <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+        <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-[var(--text-muted)] opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
           {label}
         </span>
       )}
-      {/* Glow effect */}
-      <div className="absolute inset-0 rounded-full bg-purple-500/0 group-hover:bg-purple-500/20 blur-xl transition-all duration-300" />
     </motion.a>
   )
 }

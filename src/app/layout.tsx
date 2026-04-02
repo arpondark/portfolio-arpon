@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
-import ClientSpaceBackground from "@/components/ClientSpaceBackground";
+import ThemeProvider from "@/components/ThemeProvider";
 import StructuredData from "@/components/StructuredData";
 
 const inter = Inter({
@@ -19,7 +19,6 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: '#8b5cf6',
-  colorScheme: 'dark',
 }
 
 export const metadata: Metadata = {
@@ -41,7 +40,6 @@ export const metadata: Metadata = {
     "Bangladesh",
     "React",
     "Next.js",
-    "Three.js",
     "TypeScript",
     "Node.js",
     "Laravel",
@@ -133,18 +131,29 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`scroll-smooth ${inter.variable} ${outfit.variable}`}>
+    <html lang="en" className={`scroll-smooth dark ${inter.variable} ${outfit.variable}`} suppressHydrationWarning>
       <head>
+        {/* Prevent flash: set dark mode before paint */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('portfolio-theme');
+                  if (theme === 'light') {
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch(e) {}
+              })();
+            `,
+          }}
+        />
         <StructuredData />
       </head>
-      <body className={`${outfit.className} bg-black text-white min-h-screen antialiased`}>
-        {/* 3D Space Background */}
-        <ClientSpaceBackground />
-
-        {/* Main Content */}
-        <div className="relative z-10">
+      <body className={`${outfit.className} min-h-screen antialiased bg-[var(--bg-primary)] text-[var(--text-primary)]`}>
+        <ThemeProvider>
           {children}
-        </div>
+        </ThemeProvider>
       </body>
     </html>
   );

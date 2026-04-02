@@ -4,21 +4,20 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from 'next/image';
+import { useTheme } from "./ThemeProvider";
+import { Sun, Moon, Download } from "lucide-react";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
-  // Handle scroll effect
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
@@ -30,7 +29,6 @@ export default function Navbar() {
     return () => document.removeEventListener('click', handleClickOutside);
   }, [isMobileMenuOpen]);
 
-  // Close mobile menu on scroll
   useEffect(() => {
     const handleScroll = () => {
       if (isMobileMenuOpen) setIsMobileMenuOpen(false);
@@ -51,28 +49,22 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-          ? 'py-2'
-          : 'py-4'
-        }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'py-2' : 'py-4'}`}
     >
-      {/* Glass Background */}
+      {/* Background */}
       <div
         className={`absolute inset-0 transition-all duration-500 ${isScrolled
-            ? 'bg-black/40 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-purple-500/5'
-            : 'bg-transparent backdrop-blur-sm'
+          ? 'bg-[var(--bg-secondary)]/80 backdrop-blur-xl border-b border-[var(--glass-border)] shadow-sm'
+          : 'bg-transparent backdrop-blur-sm'
           }`}
       />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center space-x-3 group"
-          >
+          <Link href="/" className="flex items-center space-x-3 group">
             <motion.div
-              className="relative w-12 h-12"
+              className="relative w-11 h-11"
               whileHover={{ scale: 1.1, rotate: 5 }}
               transition={{ type: "spring", stiffness: 400 }}
             >
@@ -80,26 +72,24 @@ export default function Navbar() {
                 src="/logo.png"
                 alt="AR Portfolio"
                 fill
-                sizes="48px"
-                className="object-contain drop-shadow-[0_0_15px_rgba(139,92,246,0.5)]"
+                sizes="44px"
+                className="object-contain"
                 priority
               />
-              {/* Glow ring on hover */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500/0 to-pink-500/0 group-hover:from-purple-500/30 group-hover:to-pink-500/30 blur-xl transition-all duration-300" />
             </motion.div>
             <div className="hidden sm:block">
-              <span className="text-xl font-bold gradient-text tracking-tight">
+              <span className="text-lg font-bold gradient-text tracking-tight">
                 ARPON
               </span>
-              <span className="block text-xs text-gray-400 -mt-1">
+              <span className="block text-xs text-[var(--text-muted)] -mt-0.5">
                 Full Stack Developer
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center">
-            <div className="flex items-center space-x-1 glass-card !rounded-full px-2 py-1 !border-white/5">
+          <div className="hidden md:flex items-center gap-2">
+            <div className="flex items-center gap-1 glass-card !rounded-full px-2 py-1">
               {navLinks.map((link, index) => (
                 <NavLink key={link.href} href={link.href} index={index}>
                   {link.label}
@@ -107,38 +97,82 @@ export default function Navbar() {
               ))}
             </div>
 
+            {/* Theme Toggle */}
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={toggleTheme}
+              className="ml-2 w-10 h-10 rounded-full glass-card !rounded-full flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+              aria-label="Toggle theme"
+            >
+              <AnimatePresence mode="wait">
+                {theme === "dark" ? (
+                  <motion.div key="sun" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                    <Sun className="w-5 h-5" />
+                  </motion.div>
+                ) : (
+                  <motion.div key="moon" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                    <Moon className="w-5 h-5" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
+
+            {/* Download CV */}
+            <motion.a
+              href="/cv/resume.pdf"
+              download
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="ml-2 px-4 py-2.5 glass-card !rounded-full text-sm font-medium text-[var(--text-primary)] flex items-center gap-2 hover:!border-[var(--accent-primary)]/30 transition-all"
+            >
+              <Download className="w-4 h-4" />
+              CV
+            </motion.a>
+
             {/* CTA Button */}
             <motion.a
               href="#contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="ml-4 px-5 py-2.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-sm font-medium text-white shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-shadow"
+              className="ml-2 px-5 py-2.5 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] rounded-full text-sm font-medium text-white shadow-lg transition-shadow hover:shadow-[var(--glow-purple)]"
             >
               Hire Me
             </motion.a>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden menu-button relative z-50 p-3 rounded-xl glass-card !border-white/10"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            <div className="w-5 h-4 relative flex flex-col justify-between">
-              <motion.span
-                animate={isMobileMenuOpen ? { rotate: 45, y: 7, width: "100%" } : { rotate: 0, y: 0, width: "100%" }}
-                className="h-0.5 bg-white rounded-full block origin-left"
-              />
-              <motion.span
-                animate={isMobileMenuOpen ? { opacity: 0, x: -20 } : { opacity: 1, x: 0 }}
-                className="w-3/4 h-0.5 bg-white rounded-full block"
-              />
-              <motion.span
-                animate={isMobileMenuOpen ? { rotate: -45, y: -7, width: "100%" } : { rotate: 0, y: 0, width: "100%" }}
-                className="h-0.5 bg-white rounded-full block origin-left"
-              />
-            </div>
-          </button>
+          {/* Mobile: Theme toggle + Hamburger */}
+          <div className="md:hidden flex items-center gap-2">
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              onClick={toggleTheme}
+              className="p-2.5 rounded-xl glass-card !border-[var(--glass-border)]"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </motion.button>
+
+            <button
+              className="menu-button relative z-50 p-3 rounded-xl glass-card !border-[var(--glass-border)]"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              <div className="w-5 h-4 relative flex flex-col justify-between">
+                <motion.span
+                  animate={isMobileMenuOpen ? { rotate: 45, y: 7, width: "100%" } : { rotate: 0, y: 0, width: "100%" }}
+                  className="h-0.5 bg-[var(--text-primary)] rounded-full block origin-left"
+                />
+                <motion.span
+                  animate={isMobileMenuOpen ? { opacity: 0, x: -20 } : { opacity: 1, x: 0 }}
+                  className="w-3/4 h-0.5 bg-[var(--text-primary)] rounded-full block"
+                />
+                <motion.span
+                  animate={isMobileMenuOpen ? { rotate: -45, y: -7, width: "100%" } : { rotate: 0, y: 0, width: "100%" }}
+                  className="h-0.5 bg-[var(--text-primary)] rounded-full block origin-left"
+                />
+              </div>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -146,15 +180,12 @@ export default function Navbar() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            animate={{ opacity: 1, backdropFilter: "blur(24px)" }}
-            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden mobile-menu fixed inset-0 bg-black/90 z-40"
+            className="md:hidden mobile-menu fixed inset-0 bg-[var(--bg-primary)]/95 backdrop-blur-xl z-40"
           >
-            {/* Gradient background */}
-            <div className="absolute inset-0 bg-mesh-gradient opacity-50" />
-
             <div className="container mx-auto px-4 pt-24 pb-8 relative z-10 h-full flex flex-col">
               <div className="flex flex-col space-y-2 flex-grow">
                 {navLinks.map((link, index) => (
@@ -168,20 +199,32 @@ export default function Navbar() {
                   </MobileNavLink>
                 ))}
 
-                {/* Mobile CTA */}
                 <motion.a
                   href="#contact"
                   onClick={() => setIsMobileMenuOpen(false)}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
-                  className="mt-4 w-full py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl text-center text-lg font-semibold text-white shadow-lg shadow-purple-500/25"
+                  className="mt-4 w-full py-4 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] rounded-2xl text-center text-lg font-semibold text-white shadow-lg"
                 >
                   Get In Touch
                 </motion.a>
+
+                {/* Download CV - Mobile */}
+                <motion.a
+                  href="/cv/resume.pdf"
+                  download
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="w-full py-4 glass-card !rounded-2xl text-center text-lg font-semibold text-[var(--text-primary)] flex items-center justify-center gap-2"
+                >
+                  <Download className="w-5 h-5" />
+                  Download CV
+                </motion.a>
               </div>
 
-              {/* Social links at bottom - no overlap */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -209,14 +252,10 @@ function NavLink({ href, children, index }: { href: string; children: React.Reac
     >
       <Link
         href={href}
-        className="relative px-4 py-2 text-sm text-gray-300 hover:text-white transition-all duration-300 rounded-full group"
+        className="relative px-4 py-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all duration-300 rounded-full group"
       >
         <span className="relative z-10">{children}</span>
-        <motion.div
-          className="absolute inset-0 bg-white/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-          layoutId="navHover"
-        />
-        <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-500 group-hover:w-1/2 transition-all duration-300 rounded-full" />
+        <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] group-hover:w-1/2 transition-all duration-300 rounded-full" />
       </Link>
     </motion.div>
   );
@@ -242,21 +281,17 @@ function MobileNavLink({
       <Link
         href={href}
         onClick={onClick}
-        className="block glass-card !rounded-2xl p-4 group hover:!bg-white/10 transition-all duration-300"
+        className="block glass-card !rounded-2xl p-4 group hover:!bg-[var(--glass-bg-hover)] transition-all duration-300"
       >
         <div className="flex items-center justify-between">
-          <span className="text-2xl font-medium text-white group-hover:gradient-text transition-all">
+          <span className="text-2xl font-medium text-[var(--text-primary)] group-hover:gradient-text transition-all">
             {children}
           </span>
-          <motion.div
-            initial={{ x: 0 }}
-            whileHover={{ x: 5 }}
-            className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-pink-500"
-          >
-            <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-8 h-8 rounded-full bg-[var(--glass-bg)] flex items-center justify-center group-hover:bg-gradient-to-r group-hover:from-[var(--accent-primary)] group-hover:to-[var(--accent-secondary)]">
+            <svg className="w-4 h-4 text-[var(--text-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-          </motion.div>
+          </div>
         </div>
       </Link>
     </motion.div>
@@ -287,7 +322,7 @@ function SocialIcon({ href, icon }: { href: string; icon: string }) {
       href={href}
       target={href.startsWith('mailto') ? undefined : '_blank'}
       rel="noopener noreferrer"
-      className="w-12 h-12 rounded-full glass-card flex items-center justify-center text-gray-400 hover:text-white hover:!bg-white/10 transition-all duration-300"
+      className="w-12 h-12 rounded-full glass-card flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-all duration-300"
     >
       {icons[icon as keyof typeof icons]}
     </a>
