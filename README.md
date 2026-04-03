@@ -2,22 +2,22 @@
 
 A modern, responsive portfolio website built with Next.js, featuring 3D animations, blog functionality, and admin dashboard.
 
-## 🚀 Live Demo
+## Live Demo
 
 - **GitHub Pages**: [https://arpondark.github.io](https://arpondark.github.io)
 - **Vercel**: [Deploy to Vercel](https://vercel.com/new)
 
-## ✨ Features
+## Features
 
-- 🎨 Modern 3D animations with Three.js
-- 📱 Fully responsive design
-- 📝 Blog system with admin dashboard
-- 🔐 Authentication system
-- 🎯 SEO optimized
-- 🌙 Dark theme support
-- ⚡ Fast performance with Next.js
+- Modern 3D animations with Three.js
+- Fully responsive design
+- Blog system with admin dashboard
+- Authentication system
+- SEO optimized
+- Dark theme support
+- Fast performance with Next.js
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend**: Next.js 15, React 19, TypeScript
 - **Styling**: Tailwind CSS
@@ -27,7 +27,7 @@ A modern, responsive portfolio website built with Next.js, featuring 3D animatio
 - **Image Storage**: Cloudinary
 - **Deployment**: GitHub Pages, Vercel
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Node.js 20+
@@ -76,7 +76,7 @@ This project is configured for deployment on both GitHub Pages and Vercel:
 
 For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
 
-## 📝 Available Scripts
+## Available Scripts
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
@@ -89,11 +89,11 @@ For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
 
 
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👨‍💻 Author
+## Author
 
 **Arpon Dark**
 - GitHub: [@arpondark](https://github.com/arpondark)
