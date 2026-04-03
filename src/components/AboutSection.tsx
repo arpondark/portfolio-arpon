@@ -15,7 +15,7 @@ export default function AboutSection() {
 
   const infoItems = [
     { icon: <MapPin className="w-5 h-5" />, label: "Location", value: "Bangladesh" },
-    { icon: <Briefcase className="w-5 h-5" />, label: "Experience", value: "3+ Years" },
+    { icon: <Briefcase className="w-5 h-5" />, label: "Experience", value: "2+ Years" },
     { icon: <GraduationCap className="w-5 h-5" />, label: "Education", value: "BSc in CSE" },
     { icon: <Code2 className="w-5 h-5" />, label: "Focus", value: "Full Stack & IoT" },
   ];
