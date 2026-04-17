@@ -3,6 +3,7 @@ import { Inter, Funnel_Display } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
 import StructuredData from "@/components/StructuredData";
+import { generateOGMetadata } from "@/lib/og-metadata";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,10 +23,12 @@ export const viewport: Viewport = {
   themeColor: '#8b5cf6',
 }
 
+// Generate OG metadata dynamically
+const ogMetadata = generateOGMetadata();
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://arpon007.me'),
-  title: "MD SHAZAN MAHMUD ARPON - Full Stack Developer Portfolio",
-  description: "Full Stack Developer specializing in Spring Boot, Laravel, React, and Next.js. Expert in PHP, Java, TypeScript, IoT systems, and AI applications. Building innovative web solutions with modern technologies.",
+  metadataBase: new URL('https://shazan.site'),
+  ...ogMetadata,
   keywords: [
     "MD SHAZAN MAHMUD ARPON",
     "Full Stack Developer",
@@ -52,7 +55,7 @@ export const metadata: Metadata = {
     "Frontend Developer",
     "Backend Developer"
   ],
-  authors: [{ name: "MD SHAZAN MAHMUD ARPON", url: "https://arpon007.me" }],
+  authors: [{ name: "MD SHAZAN MAHMUD ARPON", url: "https://shazan.site" }],
   creator: "MD SHAZAN MAHMUD ARPON",
   publisher: "MD SHAZAN MAHMUD ARPON",
   formatDetection: {
@@ -75,40 +78,13 @@ export const metadata: Metadata = {
     },
   },
   manifest: '/manifest.json',
-  openGraph: {
-    type: 'profile',
-    locale: 'en_US',
-    url: 'https://arpon007.me',
-    siteName: "MD SHAZAN MAHMUD ARPON - Portfolio",
-    title: "MD SHAZAN MAHMUD ARPON - Full Stack Developer Portfolio",
-    description: "Full Stack Developer specializing in Spring Boot, Laravel, React, and Next.js. Expert in PHP, Java, TypeScript, IoT systems, and AI applications.",
-    images: [
-      {
-        url: 'https://arpon007.me/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'MD SHAZAN MAHMUD ARPON - Portfolio Preview',
-      }
-    ],
-  },
-  alternates: {
-    canonical: 'https://arpon007.me',
-  },
   other: {
     'linkedin:card': 'summary_large_image',
     'linkedin:title': 'MD SHAZAN MAHMUD ARPON - Full Stack Developer Portfolio',
     'linkedin:description': 'Full Stack Developer specializing in Spring Boot, Laravel, React, and Next.js. Expert in PHP, Java, TypeScript, IoT systems, and AI applications.',
-    'linkedin:image': 'https://arpon007.me/og-image.png',
+    'linkedin:image': 'https://shazan.site/og-image.png',
     'linkedin:profile': 'https://www.linkedin.com/in/md-shazan-mahmud-arpon/',
     'linkedin:author': 'https://www.linkedin.com/in/md-shazan-mahmud-arpon/',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: "MD SHAZAN MAHMUD ARPON - Full Stack Developer Portfolio",
-    description: "Full Stack Developer specializing in Spring Boot, Laravel, React, and Next.js. Expert in PHP, Java, TypeScript, IoT systems, and AI applications.",
-    images: ['https://arpon007.me/og-image.png'],
-    creator: '@mdshazanmahmudarpon',
-    site: '@mdshazanmahmudarpon',
   },
   robots: {
     index: true,
@@ -132,7 +108,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`scroll-smooth dark ${inter.variable} ${funnelDisplay.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`dark ${inter.variable} ${funnelDisplay.variable}`} suppressHydrationWarning>
       <head>
         {/* Prevent flash: set dark mode before paint */}
         <script

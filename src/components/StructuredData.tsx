@@ -3,8 +3,8 @@ export default function StructuredData() {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "MD SHAZAN MAHMUD ARPON",
-    "url": "https://arpon007.me",
-    "image": "https://arpon007.me/profile.jpg",
+    "url": "https://shazan.site",
+    "image": "https://shazan.site/profile.jpg",
     "sameAs": [
       "https://www.linkedin.com/in/md-shazan-mahmud-arpon/",
       "https://github.com/mdshazanmahmudarpon"

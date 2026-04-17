@@ -97,7 +97,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Arpon Dark**
 - GitHub: [@arpondark](https://github.com/arpondark)
-- Website: [arpon007.me](https://arpon007.me)
+- Website: [shazan.site](https://shazan.site)
 
 ## 🙏 Acknowledgments
 

@@ -1,71 +1,83 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://arpon007.me',
+  siteUrl: "https://shazan.site",
   generateRobotsTxt: false, // We have our own robots.txt
   generateIndexSitemap: false,
-  changefreq: 'weekly',
+  changefreq: "weekly",
   priority: 0.7,
   sitemapSize: 7000,
   exclude: [
-    '/api/*', 
-    '/admin/*', 
-    '/auth/*', 
-    '/dark007/*',
-    '/_next/*',
-    '/.well-known/*'
+    "/api/*",
+    "/admin/*",
+    "/auth/*",
+    "/dark007/*",
+    "/_next/*",
+    "/.well-known/*",
   ],
   transform: async (config, path) => {
     // Custom transform to set different priorities and change frequencies
-    if (path === '/') {
+    if (path === "/") {
       return {
         loc: path,
-        changefreq: 'weekly',
+        changefreq: "weekly",
         priority: 1.0,
         lastmod: new Date().toISOString(),
-      }
+      };
     }
-    
-    if (path === '/blog') {
+
+    if (path === "/blog") {
       return {
         loc: path,
-        changefreq: 'daily',
+        changefreq: "daily",
         priority: 0.9,
         lastmod: new Date().toISOString(),
-      }
+      };
     }
-    
-    if (path.startsWith('/blog/')) {
+
+    if (path.startsWith("/blog/")) {
       return {
         loc: path,
-        changefreq: 'weekly',
+        changefreq: "weekly",
         priority: 0.8,
         lastmod: new Date().toISOString(),
-      }
+      };
     }
-    
+
     return {
       loc: path,
       changefreq: config.changefreq,
       priority: config.priority,
       lastmod: new Date().toISOString(),
-    }
+    };
   },
   robotsTxtOptions: {
-    additionalSitemaps: [
-      'https://arpon007.me/sitemap.xml',
-    ],
+    additionalSitemaps: ["https://shazan.site/sitemap.xml"],
     policies: [
       {
-        userAgent: '*',
-        allow: '/',
-        disallow: ['/api/', '/admin/', '/auth/', '/dark007/', '/_next/', '/.well-known/'],
+        userAgent: "*",
+        allow: "/",
+        disallow: [
+          "/api/",
+          "/admin/",
+          "/auth/",
+          "/dark007/",
+          "/_next/",
+          "/.well-known/",
+        ],
       },
       {
-        userAgent: 'Googlebot',
-        allow: '/',
-        disallow: ['/api/', '/admin/', '/auth/', '/dark007/', '/_next/', '/.well-known/'],
+        userAgent: "Googlebot",
+        allow: "/",
+        disallow: [
+          "/api/",
+          "/admin/",
+          "/auth/",
+          "/dark007/",
+          "/_next/",
+          "/.well-known/",
+        ],
         crawlDelay: 1,
       },
     ],
   },
-} 
+};

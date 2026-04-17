@@ -13,7 +13,7 @@ Allow: /blog/
 Allow: /blog/*
 
 # Sitemap location
-Sitemap: https://arpon007.me/sitemap.xml
+Sitemap: https://shazan.site/sitemap.xml
 
 # Crawl-delay for all bots
 Crawl-delay: 1
