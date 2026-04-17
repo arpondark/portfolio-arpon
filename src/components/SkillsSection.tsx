@@ -4,7 +4,6 @@ import { motion, useScroll, useTransform, AnimatePresence, PanInfo } from 'frame
 import { useRef, useState } from 'react';
 import Image from 'next/image';
 import { Sparkles, Code2, Cpu, Brain, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useMobileOptimization } from '@/hooks/useMobileOptimization';
 
 const skills = {
   web: {
@@ -73,7 +72,6 @@ const skills = {
 type CategoryKey = keyof typeof skills;
 
 export default function SkillsSection() {
-  const { isMobile } = useMobileOptimization();
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeCategory, setActiveCategory] = useState<CategoryKey>('web');
   const [swipeDirection, setSwipeDirection] = useState<'left' | 'right' | null>(null);
@@ -83,7 +81,7 @@ export default function SkillsSection() {
     offset: ["start end", "end start"]
   });
 
-  const y = isMobile ? undefined : useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
   const categories = Object.entries(skills) as [CategoryKey, typeof skills[CategoryKey]][];
   const categoryKeys = Object.keys(skills) as CategoryKey[];
@@ -145,12 +143,10 @@ export default function SkillsSection() {
       <div className="absolute inset-0 bg-grid opacity-30 dark:opacity-15" />
 
       {/* Decorative orbs */}
-      {!isMobile && (
-        <motion.div
-          style={{ y }}
-          className="absolute top-1/3 -left-48 w-80 h-80 rounded-full bg-gradient-to-br from-[var(--accent-primary)]/20 to-transparent blur-3xl"
-        />
-      )}
+      <motion.div
+        style={{ y }}
+        className="absolute top-1/3 -left-48 w-80 h-80 rounded-full bg-gradient-to-br from-[var(--accent-primary)]/20 to-transparent blur-3xl"
+      />
 
       <div className="container-custom relative z-10">
         {/* Header */}

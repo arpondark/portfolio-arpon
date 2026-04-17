@@ -108,7 +108,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`dark ${inter.variable} ${funnelDisplay.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`scroll-smooth dark ${inter.variable} ${funnelDisplay.variable}`} suppressHydrationWarning>
       <head>
         {/* Prevent flash: set dark mode before paint */}
         <script

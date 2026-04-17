@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Github, Linkedin, Mail, Code2, Sparkles, Download } from 'lucide-react'
-import { useMobileOptimization } from '@/hooks/useMobileOptimization'
 
 const roles = [
   'Spring Boot Developer',
@@ -41,9 +40,8 @@ function TypeWriter({ words }: { words: string[] }) {
 }
 
 export default function HeroEnhanced() {
-  const { isMobile } = useMobileOptimization()
   const { scrollYProgress } = useScroll()
-  const opacity = isMobile ? undefined : useTransform(scrollYProgress, [0, 0.3], [1, 0])
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0])
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -51,28 +49,24 @@ export default function HeroEnhanced() {
       <div className="absolute inset-0 bg-gradient-to-br from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--bg-primary)]" />
 
       {/* Decorative gradient blobs */}
-      {!isMobile && (
-        <>
-          <motion.div
-            className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full opacity-30 dark:opacity-20"
-            style={{
-              background: 'radial-gradient(circle, var(--accent-primary) 0%, transparent 70%)',
-              filter: 'blur(80px)',
-            }}
-            animate={{ x: [0, 60, 0], y: [0, 30, 0], scale: [1, 1.1, 1] }}
-            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-          />
-          <motion.div
-            className="absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full opacity-30 dark:opacity-20"
-            style={{
-              background: 'radial-gradient(circle, var(--accent-secondary) 0%, transparent 70%)',
-              filter: 'blur(80px)',
-            }}
-            animate={{ x: [0, -40, 0], y: [0, -30, 0], scale: [1, 1.15, 1] }}
-            transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-          />
-        </>
-      )}
+      <motion.div
+        className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full opacity-30 dark:opacity-20"
+        style={{
+          background: 'radial-gradient(circle, var(--accent-primary) 0%, transparent 70%)',
+          filter: 'blur(80px)',
+        }}
+        animate={{ x: [0, 60, 0], y: [0, 30, 0], scale: [1, 1.1, 1] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full opacity-30 dark:opacity-20"
+        style={{
+          background: 'radial-gradient(circle, var(--accent-secondary) 0%, transparent 70%)',
+          filter: 'blur(80px)',
+        }}
+        animate={{ x: [0, -40, 0], y: [0, -30, 0], scale: [1, 1.15, 1] }}
+        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+      />
 
       {/* Grid */}
       <div className="absolute inset-0 bg-grid opacity-40 dark:opacity-20" />
@@ -80,7 +74,7 @@ export default function HeroEnhanced() {
       {/* Content */}
       <motion.div
         className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20"
-        style={isMobile ? undefined : { opacity }}
+        style={{ opacity }}
       >
         {/* Desktop Layout: Two columns */}
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
