@@ -42,27 +42,27 @@ export default function SkillLogo({ skill, category, priority = false }: SkillLo
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    
+
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     if (isMobile) return;
-    
+
     const rect = event.currentTarget.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
-    
+
     x.set(event.clientX - centerX);
     y.set(event.clientY - centerY);
   };
 
   const handleMouseLeave = () => {
     if (isMobile) return;
-    
+
     x.set(0);
     y.set(0);
   };
@@ -100,15 +100,15 @@ export default function SkillLogo({ skill, category, priority = false }: SkillLo
         }}
       >
         {/* Animated background glow */}
-        <div 
+        <div
           className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-500 rounded-2xl blur-xl"
           style={{
-            background: skill.color ? `radial-gradient(circle, ${skill.color}40, transparent 70%)` : 
-                       category?.gradient ? `linear-gradient(45deg, ${category.gradient.replace(/from-|via-|to-/g, '').split(' ').map(c => c + '40').join(', ')})` :
-                       'radial-gradient(circle, #8B5CF6, transparent 70%)'
+            background: skill.color ? `radial-gradient(circle, ${skill.color}40, transparent 70%)` :
+              category?.gradient ? `linear-gradient(45deg, ${category.gradient.replace(/from-|via-|to-/g, '').split(' ').map(c => c + '40').join(', ')})` :
+                'radial-gradient(circle, #8B5CF6, transparent 70%)'
           }}
         />
-        
+
         {/* Icon container with color accent */}
         <div className="relative z-10">
           <div className={`relative w-16 h-16 flex items-center justify-center p-2 rounded-xl 
@@ -122,15 +122,14 @@ export default function SkillLogo({ skill, category, priority = false }: SkillLo
                   width={48}
                   height={48}
                   priority={priority}
-                  className={`transition-all duration-500 filter drop-shadow-lg ${
-                    isLoading ? 'opacity-0 scale-50' : 'opacity-100 scale-100 group-hover:scale-110'
-                  }`}
+                  className={`transition-all duration-500 filter drop-shadow-lg ${isLoading ? 'opacity-0 scale-50' : 'opacity-100 scale-100 group-hover:scale-110'
+                    }`}
                   onLoad={handleImageLoad}
                   onError={handleImageError}
                 />
                 {isLoading && (
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div 
+                    <div
                       className="w-8 h-8 border-4 border-t-transparent rounded-full animate-spin"
                       style={{ borderColor: skill.color || '#8B5CF6' }}
                     />
@@ -142,26 +141,24 @@ export default function SkillLogo({ skill, category, priority = false }: SkillLo
             )}
           </div>
         </div>
-        
+
         {/* Skill name with gradient */}
-        <h3 className={`text-sm font-semibold text-center leading-tight z-10 ${
-          skill.color || category?.gradient ? 
-            `bg-gradient-to-r ${category?.gradient || `from-white to-gray-300`} bg-clip-text text-transparent` : 
+        <h3 className={`text-sm font-semibold text-center leading-tight z-10 ${skill.color || category?.gradient ?
+            `bg-gradient-to-r ${category?.gradient || `from-white to-gray-300`} bg-clip-text text-transparent` :
             'text-white'
-        }`}>
+          }`}>
           {skill.name}
         </h3>
-        
+
         {/* Enhanced progress bar */}
         <div className="w-full relative z-10">
           <div className="w-full h-2 bg-gray-700/50 rounded-full backdrop-blur-sm">
             <motion.div
-              className={`h-full rounded-full relative overflow-hidden ${
-                skill.color ? '' : `bg-gradient-to-r ${category?.gradient || 'from-purple-500 to-pink-500'}`
-              }`}
+              className={`h-full rounded-full relative overflow-hidden ${skill.color ? '' : `bg-gradient-to-r ${category?.gradient || 'from-emerald-500 to-red-500'}`
+                }`}
               style={{
-                background: skill.color ? 
-                  `linear-gradient(90deg, ${skill.color}80, ${skill.color})` : 
+                background: skill.color ?
+                  `linear-gradient(90deg, ${skill.color}80, ${skill.color})` :
                   undefined
               }}
               initial={{ width: 0 }}
@@ -174,12 +171,12 @@ export default function SkillLogo({ skill, category, priority = false }: SkillLo
                 animate-pulse opacity-50" />
             </motion.div>
           </div>
-          
+
           {/* Skill level badge */}
           <motion.div
             className={`absolute -top-8 right-0 px-2 py-1 text-xs font-bold rounded-full 
               ${skill.color ? 'text-white' : 'text-gray-300'}
-              ${skill.color ? '' : `bg-gradient-to-r ${category?.gradient || 'from-purple-500/20 to-pink-500/20'}`}`}
+              ${skill.color ? '' : `bg-gradient-to-r ${category?.gradient || 'from-emerald-500/20 to-red-500/20'}`}`}
             style={{
               background: skill.color ? `${skill.color}20` : undefined,
               border: skill.color ? `1px solid ${skill.color}40` : undefined
@@ -192,7 +189,7 @@ export default function SkillLogo({ skill, category, priority = false }: SkillLo
             {skill.level}%
           </motion.div>
         </div>
-        
+
         {/* Floating particles effect */}
         <div className="absolute inset-0 pointer-events-none">
           {[...Array(3)].map((_, i) => (

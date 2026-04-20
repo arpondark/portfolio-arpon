@@ -20,7 +20,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#8b5cf6',
+  themeColor: '#10b981',
 }
 
 // Generate OG metadata dynamically

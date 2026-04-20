@@ -21,10 +21,10 @@ export default function RichTextEditor({ value, onChange, contentType }: RichTex
     const end = textarea.selectionEnd
     const selectedText = value.substring(start, end)
     const newText = before + selectedText + after
-    
+
     const newValue = value.substring(0, start) + newText + value.substring(end)
     onChange(newValue)
-    
+
     // Set cursor position
     setTimeout(() => {
       textarea.focus()
@@ -38,7 +38,7 @@ export default function RichTextEditor({ value, onChange, contentType }: RichTex
 
   const insertImage = async () => {
     const choice = confirm('Upload image from your device? (Cancel to enter URL instead)')
-    
+
     if (choice) {
       // Create file input for upload
       const input = document.createElement('input')
@@ -98,9 +98,9 @@ export default function RichTextEditor({ value, onChange, contentType }: RichTex
       .replace(/^# (.*$)/gim, '<h1 class="text-2xl font-semibold text-white mb-4">$1</h1>')
       .replace(/\*\*(.*)\*\*/gim, '<strong class="text-white">$1</strong>')
       .replace(/\*(.*)\*/gim, '<em class="text-gray-300">$1</em>')
-      .replace(/`(.*)`/gim, '<code class="bg-gray-700 text-purple-400 px-2 py-1 rounded">$1</code>')
+      .replace(/`(.*)`/gim, '<code class="bg-gray-700 text-emerald-400 px-2 py-1 rounded">$1</code>')
       .replace(/!\[(.*?)\]\((.*?)\)/gim, '<img src="$2" alt="$1" class="max-w-full h-auto rounded-lg my-4" />')
-      .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" class="text-purple-400 hover:text-purple-300">$1</a>')
+      .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" class="text-emerald-400 hover:text-emerald-300">$1</a>')
       .replace(/^- (.*$)/gim, '<li class="text-gray-300 ml-4">$1</li>')
       .replace(/\n\n/gim, '</p><p class="text-gray-300 mb-4">')
       .replace(/\n/gim, '<br />')
@@ -163,7 +163,7 @@ export default function RichTextEditor({ value, onChange, contentType }: RichTex
             </button>
           ))}
         </div>
-        
+
         {contentType === 'markdown' && (
           <button
             type="button"
@@ -180,7 +180,7 @@ export default function RichTextEditor({ value, onChange, contentType }: RichTex
       <div className="relative">
         {showPreview && contentType === 'markdown' ? (
           <div className="min-h-[400px] p-4 bg-gray-700 rounded-lg border border-gray-600">
-            <div 
+            <div
               className="prose prose-invert max-w-none"
               dangerouslySetInnerHTML={{ __html: renderMarkdown(value) }}
             />
@@ -190,9 +190,9 @@ export default function RichTextEditor({ value, onChange, contentType }: RichTex
             ref={textareaRef}
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            className="w-full min-h-[400px] p-4 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 resize-vertical"
+            className="w-full min-h-[400px] p-4 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-vertical"
             placeholder={
-              contentType === 'markdown' 
+              contentType === 'markdown'
                 ? 'Write your markdown content here...\n\n# Heading\n**Bold text**\n*Italic text*\n- List item\n[Link](url)\n![Image](url)'
                 : 'Write your content here...'
             }

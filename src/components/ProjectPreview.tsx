@@ -78,17 +78,17 @@ export default function ProjectPreview({ project }: { project: ProjectPreviewPro
         whileHover={{ scale: isMobile ? 1 : 1.02 }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
-        <div className="relative h-[400px] bg-black/40 backdrop-blur-lg rounded-xl overflow-hidden border border-white/10 transition-all duration-300 hover:border-purple-500/50">
+        <div className="relative h-[400px] bg-black/40 backdrop-blur-lg rounded-xl overflow-hidden border border-white/10 transition-all duration-300 hover:border-emerald-500/50">
           {/* Loading State */}
           {isLoading && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-10">
-              <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
+              <div className="w-12 h-12 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin" />
             </div>
           )}
 
           {/* 3D Preview Frame */}
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-red-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
           {/* Project Image (Fallback) */}
           <div className="absolute inset-0">
             <Image
@@ -105,9 +105,8 @@ export default function ProjectPreview({ project }: { project: ProjectPreviewPro
           <div className="relative h-full w-full">
             <iframe
               src={project.link}
-              className={`w-full h-full transition-opacity duration-500 ${
-                isMobile ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-              }`}
+              className={`w-full h-full transition-opacity duration-500 ${isMobile ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                }`}
               title={project.title}
               onLoad={handleIframeLoad}
               sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
@@ -122,13 +121,13 @@ export default function ProjectPreview({ project }: { project: ProjectPreviewPro
           <div className="absolute inset-0 p-6 flex flex-col justify-end transform translate-z-50">
             <h3 className="text-2xl font-bold mb-2 gradient-text">{project.title}</h3>
             <p className="text-gray-300 mb-4">{project.description}</p>
-            
+
             {/* Tech Stack */}
             <div className="flex flex-wrap gap-2 mb-4">
               {project.tech.map((tech) => (
                 <span
                   key={tech}
-                  className="px-3 py-1 text-sm rounded-full bg-purple-500/20 text-purple-300"
+                  className="px-3 py-1 text-sm rounded-full bg-emerald-500/20 text-emerald-300"
                 >
                   {tech}
                 </span>
@@ -180,7 +179,7 @@ export default function ProjectPreview({ project }: { project: ProjectPreviewPro
           >
             {isLoading && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-10">
-                <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
+                <div className="w-12 h-12 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin" />
               </div>
             )}
             <iframe

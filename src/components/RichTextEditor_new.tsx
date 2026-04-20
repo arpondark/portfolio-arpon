@@ -26,13 +26,12 @@ function ToolbarButton({ icon: Icon, onClick, active = false, title, disabled = 
       onClick={onClick}
       title={title}
       disabled={disabled}
-      className={`p-2 rounded-md transition-colors ${
-        disabled 
+      className={`p-2 rounded-md transition-colors ${disabled
           ? 'text-gray-600 cursor-not-allowed'
-          : active 
-          ? 'bg-purple-500 text-white' 
-          : 'text-gray-400 hover:text-white hover:bg-gray-700'
-      }`}
+          : active
+            ? 'bg-emerald-500 text-white'
+            : 'text-gray-400 hover:text-white hover:bg-gray-700'
+        }`}
     >
       <Icon className="w-4 h-4" />
     </button>
@@ -50,21 +49,21 @@ function markdownToHtml(markdown: string): string {
     .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-white">$1</strong>')
     .replace(/\*(.*?)\*/g, '<em class="italic text-gray-300">$1</em>')
     // Code
-    .replace(/`(.*?)`/g, '<code class="bg-gray-800 text-purple-300 px-1 rounded">$1</code>')
+    .replace(/`(.*?)`/g, '<code class="bg-gray-800 text-emerald-300 px-1 rounded">$1</code>')
     // Links
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-purple-400 hover:text-purple-300 underline" target="_blank" rel="noopener noreferrer">$1</a>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-emerald-400 hover:text-emerald-300 underline" target="_blank" rel="noopener noreferrer">$1</a>')
     // Lists
     .replace(/^\* (.*)$/gm, '<li class="text-gray-300 ml-4">• $1</li>')
     .replace(/^(\d+)\. (.*)$/gm, '<li class="text-gray-300 ml-4">$1. $2</li>')
     // Blockquotes
-    .replace(/^> (.*)$/gm, '<blockquote class="border-l-4 border-purple-500 pl-4 italic text-gray-400">$1</blockquote>')
+    .replace(/^> (.*)$/gm, '<blockquote class="border-l-4 border-emerald-500 pl-4 italic text-gray-400">$1</blockquote>')
     // Line breaks
     .replace(/\n/g, '<br>')
 }
 
-export default function RichTextEditor({ 
-  value = '', 
-  onChange, 
+export default function RichTextEditor({
+  value = '',
+  onChange,
   placeholder = 'Write your story...',
   contentType = 'plaintext',
   onContentTypeChange
@@ -95,9 +94,9 @@ export default function RichTextEditor({
     const selectedText = safeValue.substring(start, end)
     const textToInsert = selectedText || placeholder
     const newText = safeValue.substring(0, start) + before + textToInsert + after + safeValue.substring(end)
-    
+
     onChange(newText)
-    
+
     // Set cursor position after the inserted text
     setTimeout(() => {
       const newCursorPos = start + before.length + textToInsert.length + after.length
@@ -116,11 +115,10 @@ export default function RichTextEditor({
             <button
               type="button"
               onClick={() => handleContentTypeChange('plaintext')}
-              className={`px-3 py-1 text-sm rounded-md transition-colors flex items-center space-x-1 ${
-                currentContentType === 'plaintext'
+              className={`px-3 py-1 text-sm rounded-md transition-colors flex items-center space-x-1 ${currentContentType === 'plaintext'
                   ? 'bg-blue-500 text-white'
                   : 'text-gray-400 hover:text-white hover:bg-gray-700'
-              }`}
+                }`}
             >
               <FileText className="w-3 h-3" />
               <span>Plain Text</span>
@@ -128,27 +126,25 @@ export default function RichTextEditor({
             <button
               type="button"
               onClick={() => handleContentTypeChange('markdown')}
-              className={`px-3 py-1 text-sm rounded-md transition-colors flex items-center space-x-1 ${
-                currentContentType === 'markdown'
-                  ? 'bg-purple-500 text-white'
+              className={`px-3 py-1 text-sm rounded-md transition-colors flex items-center space-x-1 ${currentContentType === 'markdown'
+                  ? 'bg-emerald-500 text-white'
                   : 'text-gray-400 hover:text-white hover:bg-gray-700'
-              }`}
+                }`}
             >
               <Hash className="w-3 h-3" />
               <span>Markdown</span>
             </button>
           </div>
         </div>
-        
+
         {currentContentType === 'markdown' && (
           <button
             type="button"
             onClick={() => setPreviewMode(!previewMode)}
-            className={`px-3 py-1 text-sm rounded-md transition-colors flex items-center space-x-1 ${
-              previewMode
+            className={`px-3 py-1 text-sm rounded-md transition-colors flex items-center space-x-1 ${previewMode
                 ? 'bg-green-500 text-white'
                 : 'text-gray-400 hover:text-white hover:bg-gray-700'
-            }`}
+              }`}
           >
             {previewMode ? <EyeOff className="w-3 h-3" /> : <Eye className="w-3 h-3" />}
             <span>{previewMode ? 'Edit' : 'Preview'}</span>
@@ -207,10 +203,10 @@ export default function RichTextEditor({
       {/* Editor/Preview Area */}
       <div className="relative">
         {previewMode && currentContentType === 'markdown' ? (
-          <div 
+          <div
             className="min-h-[400px] p-4 bg-gray-900 rounded-b-lg border border-gray-700 prose prose-invert max-w-none"
-            dangerouslySetInnerHTML={{ 
-              __html: markdownToHtml(safeValue) || '<p class="text-gray-500">Nothing to preview...</p>' 
+            dangerouslySetInnerHTML={{
+              __html: markdownToHtml(safeValue) || '<p class="text-gray-500">Nothing to preview...</p>'
             }}
           />
         ) : (
@@ -219,9 +215,8 @@ export default function RichTextEditor({
             value={safeValue}
             onChange={(e) => onChange(e.target.value)}
             placeholder={currentContentType === 'markdown' ? `${placeholder}\n\nMarkdown supported:\n# Heading\n**bold** *italic*\n- bullet points\n[link](url)\n\`code\`` : placeholder}
-            className={`w-full min-h-[400px] p-4 bg-gray-900 text-white placeholder-gray-500 border border-gray-700 resize-none focus:outline-none focus:border-purple-500 transition-colors font-mono text-sm leading-relaxed ${
-              currentContentType === 'markdown' && !previewMode ? 'rounded-b-lg' : 'rounded-lg'
-            }`}
+            className={`w-full min-h-[400px] p-4 bg-gray-900 text-white placeholder-gray-500 border border-gray-700 resize-none focus:outline-none focus:border-emerald-500 transition-colors font-mono text-sm leading-relaxed ${currentContentType === 'markdown' && !previewMode ? 'rounded-b-lg' : 'rounded-lg'
+              }`}
             style={{
               lineHeight: '1.6'
             }}

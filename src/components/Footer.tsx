@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaFacebook, FaEnvelope, FaHeart, FaPhone } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaFacebook, FaEnvelope, FaPhone } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -19,7 +19,7 @@ export default function Footer() {
     { href: "https://github.com/arpondark", icon: <FaGithub />, label: "GitHub" },
     { href: "https://www.linkedin.com/in/md-shazan-mahmud-arpon", icon: <FaLinkedin />, label: "LinkedIn" },
     { href: "https://www.facebook.com/shazan.arpon007", icon: <FaFacebook />, label: "Facebook" },
-    { href: "mailto:arponarpon007@gmail.com", icon: <FaEnvelope />, label: "Email" },
+    { href: "mailto:shazanarpon@shazan.site", icon: <FaEnvelope />, label: "Email" },
   ];
 
   return (
@@ -61,10 +61,10 @@ export default function Footer() {
           </p>
 
           <motion.a
-            href="mailto:arponarpon007@gmail.com"
+            href="mailto:shazanarpon@shazan.site"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] rounded-full text-lg font-semibold text-white shadow-lg hover:shadow-[var(--glow-purple)] transition-shadow"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] rounded-full text-lg font-semibold text-white shadow-lg hover:shadow-[var(--glow-green)] transition-shadow"
           >
             <FaEnvelope className="w-5 h-5" />
             Send Me an Email
@@ -143,7 +143,7 @@ export default function Footer() {
               <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-5">Contact Info</h3>
               <div className="space-y-4">
                 <motion.a
-                  href="mailto:arponarpon007@gmail.com"
+                  href="mailto:shazanarpon@shazan.site"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -154,7 +154,7 @@ export default function Footer() {
                   </div>
                   <div>
                     <div className="text-sm text-[var(--text-muted)]">Email</div>
-                    <div className="text-sm">arponarpon007@gmail.com</div>
+                    <div className="text-sm">shazanarpon@shazan.site</div>
                   </div>
                 </motion.a>
 
@@ -199,12 +199,9 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="glass-card !rounded-none !border-t-0 py-6 px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-center">
+          <div className="flex justify-center items-center text-center">
             <p className="text-[var(--text-muted)] text-sm">
               © {currentYear} MD SHAZAN MAHMUD ARPON. All rights reserved.
-            </p>
-            <p className="text-[var(--text-muted)] text-sm flex items-center gap-2">
-              Made with <FaHeart className="text-[var(--accent-secondary)] animate-pulse" /> using Next.js & React
             </p>
           </div>
         </div>

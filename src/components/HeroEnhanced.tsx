@@ -48,24 +48,22 @@ export default function HeroEnhanced() {
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--bg-primary)]" />
 
-      {/* Decorative gradient blobs */}
-      <motion.div
-        className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full opacity-30 dark:opacity-20"
+      {/* Decorative gradient blobs - CSS-only for performance */}
+      <div
+        className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full opacity-30 dark:opacity-20 animate-blob-drift-1"
         style={{
           background: 'radial-gradient(circle, var(--accent-primary) 0%, transparent 70%)',
           filter: 'blur(80px)',
+          willChange: 'transform',
         }}
-        animate={{ x: [0, 60, 0], y: [0, 30, 0], scale: [1, 1.1, 1] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
       />
-      <motion.div
-        className="absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full opacity-30 dark:opacity-20"
+      <div
+        className="absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full opacity-30 dark:opacity-20 animate-blob-drift-2"
         style={{
           background: 'radial-gradient(circle, var(--accent-secondary) 0%, transparent 70%)',
           filter: 'blur(80px)',
+          willChange: 'transform',
         }}
-        animate={{ x: [0, -40, 0], y: [0, -30, 0], scale: [1, 1.15, 1] }}
-        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* Grid */}
@@ -140,7 +138,7 @@ export default function HeroEnhanced() {
             >
               <Link
                 href="#projects"
-                className="group px-7 py-3.5 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] text-white rounded-full font-semibold text-base transition-all duration-300 hover:shadow-xl hover:shadow-[var(--glow-purple)] flex items-center gap-3"
+                className="group px-7 py-3.5 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] text-white rounded-full font-semibold text-base transition-all duration-300 hover:shadow-xl hover:shadow-[var(--glow-green)] flex items-center gap-3"
               >
                 <span>Explore My Work</span>
                 <motion.span
@@ -169,7 +167,7 @@ export default function HeroEnhanced() {
             >
               <SocialLink href="https://github.com/arpondark" icon={<Github className="w-5 h-5" />} label="GitHub" />
               <SocialLink href="https://linkedin.com/in/md-shazan-mahmud-arpon" icon={<Linkedin className="w-5 h-5" />} label="LinkedIn" />
-              <SocialLink href="mailto:arponarpon007@gmail.com" icon={<Mail className="w-5 h-5" />} label="Email" />
+              <SocialLink href="mailto:shazanarpon@shazan.site" icon={<Mail className="w-5 h-5" />} label="Email" />
             </motion.div>
           </div>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Github, Code2, Zap, ChevronLeft, ChevronRight, Filter, Server, Globe } from "lucide-react";
 
 const projects = [
@@ -200,15 +200,7 @@ type FilterType = 'all' | 'featured' | 'spring-boot' | 'web' | 'backend';
 
 export default function ProjectShowcase3D() {
   const [filter, setFilter] = useState<FilterType>('all');
-  const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
   const filteredProjects = projects.filter(project => {
     switch (filter) {
@@ -230,7 +222,6 @@ export default function ProjectShowcase3D() {
 
   return (
     <section
-      ref={containerRef}
       id="projects"
       className="relative py-24 md:py-32 overflow-hidden"
     >
@@ -238,8 +229,7 @@ export default function ProjectShowcase3D() {
       <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-primary)] via-[var(--bg-tertiary)]/50 to-[var(--bg-primary)]" />
       <div className="absolute inset-0 bg-grid opacity-30 dark:opacity-15" />
 
-      <motion.div
-        style={{ y }}
+      <div
         className="absolute top-1/4 -right-32 w-80 h-80 rounded-full bg-gradient-to-br from-[var(--accent-primary)]/20 to-transparent blur-3xl"
       />
 
@@ -338,11 +328,10 @@ export default function ProjectShowcase3D() {
               {filteredProjects.map((project, index) => (
                 <motion.div
                   key={project.id}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ delay: index * 0.03 }}
-                  layout
+                  exit={{ opacity: 0 }}
+                  transition={{ delay: index * 0.02 }}
                 >
                   <ProjectCard project={project} />
                 </motion.div>
@@ -368,7 +357,7 @@ export default function ProjectShowcase3D() {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] rounded-full text-lg font-semibold text-white shadow-lg hover:shadow-[var(--glow-purple)] transition-shadow"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] rounded-full text-lg font-semibold text-white shadow-lg hover:shadow-[var(--glow-green)] transition-shadow"
           >
             <Github className="w-5 h-5" />
             View All on GitHub
@@ -393,8 +382,8 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
           <div className="flex items-center gap-2 flex-1 min-w-0">
             {/* Icon */}
             <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${isSpringBoot
-                ? 'bg-green-500/15 text-green-600 dark:text-green-400'
-                : 'bg-[var(--accent-primary)]/10 text-[var(--accent-primary)]'
+              ? 'bg-green-500/15 text-green-600 dark:text-green-400'
+              : 'bg-[var(--accent-primary)]/10 text-[var(--accent-primary)]'
               }`}>
               {isSpringBoot ? <Server className="w-4.5 h-4.5" /> : <Globe className="w-4.5 h-4.5" />}
             </div>

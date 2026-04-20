@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform, AnimatePresence, PanInfo } from 'framer-motion';
+import { motion, AnimatePresence, PanInfo } from 'framer-motion';
 import { useRef, useState } from 'react';
 import Image from 'next/image';
 import { Sparkles, Code2, Cpu, Brain, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -9,7 +9,7 @@ const skills = {
   web: {
     title: "Web Development",
     icon: <Code2 className="w-6 h-6" />,
-    gradient: "from-blue-500 to-purple-600",
+    gradient: "from-blue-500 to-emerald-600",
     items: [
       { name: "Spring Boot", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg", level: 90, color: "#6DB33F" },
       { name: "Laravel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg", level: 85, color: "#FF2D20" },
@@ -25,7 +25,7 @@ const skills = {
   languages: {
     title: "Programming Languages",
     icon: <Cpu className="w-6 h-6" />,
-    gradient: "from-purple-500 to-pink-600",
+    gradient: "from-emerald-500 to-red-600",
     items: [
       { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg", level: 90, color: "#ED8B00" },
       { name: "PHP", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg", level: 85, color: "#777BB4" },
@@ -75,13 +75,6 @@ export default function SkillsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeCategory, setActiveCategory] = useState<CategoryKey>('web');
   const [swipeDirection, setSwipeDirection] = useState<'left' | 'right' | null>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"]
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
   const categories = Object.entries(skills) as [CategoryKey, typeof skills[CategoryKey]][];
   const categoryKeys = Object.keys(skills) as CategoryKey[];
@@ -143,8 +136,7 @@ export default function SkillsSection() {
       <div className="absolute inset-0 bg-grid opacity-30 dark:opacity-15" />
 
       {/* Decorative orbs */}
-      <motion.div
-        style={{ y }}
+      <div
         className="absolute top-1/3 -left-48 w-80 h-80 rounded-full bg-gradient-to-br from-[var(--accent-primary)]/20 to-transparent blur-3xl"
       />
 

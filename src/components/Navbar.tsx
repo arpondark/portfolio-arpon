@@ -137,7 +137,7 @@ export default function Navbar() {
               href="#contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="ml-2 px-5 py-2.5 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] rounded-full text-sm font-medium text-white shadow-lg transition-shadow hover:shadow-[var(--glow-purple)]"
+              className="ml-2 px-5 py-2.5 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] rounded-full text-sm font-medium text-white shadow-lg transition-shadow hover:shadow-[var(--glow-green)]"
             >
               Hire Me
             </motion.a>
@@ -237,7 +237,7 @@ export default function Navbar() {
               >
                 <SocialIcon href="https://github.com/arpondark" icon="github" />
                 <SocialIcon href="https://linkedin.com/in/md-shazan-mahmud-arpon" icon="linkedin" />
-                <SocialIcon href="mailto:arponarpon007@gmail.com" icon="email" />
+                <SocialIcon href="mailto:shazanarpon@shazan.site" icon="email" />
               </motion.div>
             </div>
           </motion.div>

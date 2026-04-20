@@ -1,17 +1,11 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef } from "react";
 import { User, MapPin, Briefcase, GraduationCap, Heart, Code2 } from "lucide-react";
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"]
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [60, -60]);
 
   const infoItems = [
     { icon: <MapPin className="w-5 h-5" />, label: "Location", value: "Bangladesh" },
@@ -40,12 +34,11 @@ export default function AboutSection() {
       <div className="absolute inset-0 bg-grid opacity-30 dark:opacity-15" />
 
       {/* Decorative orb */}
-      <motion.div
-        style={{ y }}
+      <div
         className="absolute top-1/4 -right-32 w-80 h-80 rounded-full opacity-20"
       >
         <div className="w-full h-full rounded-full bg-gradient-to-br from-[var(--accent-primary)] to-[var(--accent-secondary)] blur-3xl" />
-      </motion.div>
+      </div>
 
       <div className="container-custom relative z-10">
         <div className="max-w-6xl mx-auto">
