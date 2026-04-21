@@ -11,7 +11,7 @@ export default function AboutSection() {
     { icon: <MapPin className="w-5 h-5" />, label: "Location", value: "Bangladesh" },
     { icon: <Briefcase className="w-5 h-5" />, label: "Experience", value: "2+ Years" },
     { icon: <GraduationCap className="w-5 h-5" />, label: "Education", value: "BSc in CSE" },
-    { icon: <Code2 className="w-5 h-5" />, label: "Focus", value: "Full Stack & IoT" },
+    { icon: <Code2 className="w-5 h-5" />, label: "Focus", value: "Spring Boot (Backend Focused)" },
   ];
 
   const interests = [
@@ -83,9 +83,9 @@ export default function AboutSection() {
               <div className="glass-card-neon p-8 md:p-10 h-full">
                 <p className="text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed mb-6">
                   I&apos;m a passionate <span className="text-green-600 dark:text-green-400 font-medium">Spring Boot & Java Developer</span> with deep expertise in building scalable, enterprise-grade applications.
-                  My journey in tech spans across
-                  <span className="text-[var(--accent-primary)] font-medium"> Full Stack Development</span>,
-                  <span className="text-[var(--accent-tertiary)] font-medium"> IoT Systems</span>, and
+                  My main target is
+                  <span className="text-[var(--accent-primary)] font-medium"> Spring Boot Backend Development</span>, while also working across
+                  <span className="text-[var(--accent-tertiary)] font-medium"> IoT Systems</span> and
                   <span className="text-[var(--accent-secondary)] font-medium"> AI Applications</span>.
                 </p>
 

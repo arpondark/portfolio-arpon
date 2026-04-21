@@ -31,6 +31,7 @@ export const metadata: Metadata = {
   ...ogMetadata,
   keywords: [
     "MD SHAZAN MAHMUD ARPON",
+    "Spring Boot Backend Developer",
     "Full Stack Developer",
     "Web Developer",
     "Laravel Developer",
@@ -80,8 +81,8 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
   other: {
     'linkedin:card': 'summary_large_image',
-    'linkedin:title': 'MD SHAZAN MAHMUD ARPON - Full Stack Developer Portfolio',
-    'linkedin:description': 'Full Stack Developer specializing in Spring Boot, Laravel, React, and Next.js. Expert in PHP, Java, TypeScript, IoT systems, and AI applications.',
+    'linkedin:title': 'MD SHAZAN MAHMUD ARPON - Spring Boot Backend Developer Portfolio',
+    'linkedin:description': 'Spring Boot Backend Developer specializing in scalable APIs, microservices, Java architecture, and AI-integrated IoT solutions.',
     'linkedin:image': 'https://shazan.site/og-image.png',
     'linkedin:profile': 'https://www.linkedin.com/in/md-shazan-mahmud-arpon/',
     'linkedin:author': 'https://www.linkedin.com/in/md-shazan-mahmud-arpon/',

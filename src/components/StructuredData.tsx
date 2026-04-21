@@ -9,12 +9,12 @@ export default function StructuredData() {
       "https://www.linkedin.com/in/md-shazan-mahmud-arpon/",
       "https://github.com/mdshazanmahmudarpon"
     ],
-    "jobTitle": "Fullstack Developer",
+    "jobTitle": "Spring Boot Developer",
     "worksFor": {
       "@type": "Organization",
       "name": "Independent Developer"
     },
-    "description": "Fullstack Developer | IoT Enthusiast | AI Passionate | Building innovative web solutions with modern technologies",
+    "description": "Spring Boot Developer focused on Backend Engineering, scalable APIs, and AI-integrated solutions",
     "knowsAbout": [
       "Web Development",
       "IoT Development",

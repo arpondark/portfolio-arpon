@@ -4,12 +4,13 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Github, Linkedin, Mail, Code2, Sparkles, Download } from 'lucide-react'
+import { Github, Linkedin, Mail, Code2, Sparkles } from 'lucide-react'
 
 const roles = [
   'Spring Boot Developer',
+  'Backend Developer',
   'Java Developer',
-  'Full Stack Developer',
+  'Backend-Focused Full Stack Developer',
   'MERN Stack Developer',
   'IoT & Embedded Developer',
   'Game Developer'
@@ -123,10 +124,10 @@ export default function HeroEnhanced() {
               transition={{ delay: 0.5 }}
               className="text-lg text-[var(--text-secondary)] max-w-lg mx-auto lg:mx-0 mb-8 leading-relaxed"
             >
-              Passionate about building robust backend systems and exceptional digital experiences.
+              Spring Boot backend developer focused on building scalable APIs, microservices, and reliable system architecture.
               Specializing in <span className="text-[var(--accent-primary)] font-medium">Spring Boot & Java</span>,
-              <span className="text-[var(--accent-secondary)] font-medium"> Full Stack Development</span>, and
-              <span className="text-[var(--accent-tertiary)] font-medium"> IoT & AI Solutions</span>.
+              <span className="text-[var(--accent-secondary)] font-medium"> Backend Engineering</span>, and
+              <span className="text-[var(--accent-tertiary)] font-medium"> AI-enabled & IoT-integrated solutions</span>.
             </motion.p>
 
             {/* CTA Buttons */}
