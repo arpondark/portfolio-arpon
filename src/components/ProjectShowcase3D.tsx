@@ -202,7 +202,12 @@ export default function ProjectShowcase3D() {
   const [filter, setFilter] = useState<FilterType>('all');
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const filteredProjects = projects.filter(project => {
+  const projectsWithGraphQL = projects.map((project) => ({
+    ...project,
+    tech: project.tech.includes('GraphQL') ? project.tech : [...project.tech, 'GraphQL']
+  }));
+
+  const filteredProjects = projectsWithGraphQL.filter(project => {
     switch (filter) {
       case 'featured': return project.featured;
       case 'spring-boot': return project.category === 'Spring Boot';

@@ -11,7 +11,7 @@ export default function AboutSection() {
     { icon: <MapPin className="w-5 h-5" />, label: "Location", value: "Bangladesh" },
     { icon: <Briefcase className="w-5 h-5" />, label: "Experience", value: "2+ Years" },
     { icon: <GraduationCap className="w-5 h-5" />, label: "Education", value: "BSc in CSE" },
-    { icon: <Code2 className="w-5 h-5" />, label: "Focus", value: "Spring Boot (Backend Focused)" },
+    { icon: <Code2 className="w-5 h-5" />, label: "Focus", value: "Spring Boot + GraphQL APIs" },
   ];
 
   const interests = [
@@ -90,7 +90,7 @@ export default function AboutSection() {
                 </p>
 
                 <p className="text-[var(--text-secondary)] leading-relaxed mb-6">
-                  I specialize in building robust backend systems with <span className="text-green-600 dark:text-green-400 font-medium">Spring Boot</span> and <span className="text-orange-600 dark:text-orange-400 font-medium">Java</span>, designing microservices architectures, and implementing RESTful APIs.
+                  I specialize in building robust backend systems with <span className="text-green-600 dark:text-green-400 font-medium">Spring Boot</span> and <span className="text-orange-600 dark:text-orange-400 font-medium">Java</span>, designing microservices architectures, and implementing RESTful + <span className="text-pink-600 dark:text-pink-400 font-medium">GraphQL</span> APIs.
                   For frontend, I create beautiful interfaces with <span className="text-blue-600 dark:text-blue-400">React</span> and <span className="text-[var(--text-primary)] font-medium">Next.js</span>.
                 </p>
 
