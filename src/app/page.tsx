@@ -8,8 +8,7 @@ import ScrollToTop from '@/components/ScrollToTop';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] transition-colors duration-300">
-      {/* Content */}
+    <div className="min-h-screen relative">
       <div className="relative z-10">
         <Navbar />
         <main>
@@ -20,8 +19,6 @@ export default function Home() {
         </main>
         <Footer />
       </div>
-
-      {/* Scroll to top button */}
       <ScrollToTop />
     </div>
   );

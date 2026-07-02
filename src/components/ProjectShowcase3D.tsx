@@ -2,10 +2,9 @@
 
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Github, Code2, Zap, ChevronLeft, ChevronRight, Filter, Server, Globe } from "lucide-react";
+import { ExternalLink, Github, Code2, Zap, ChevronLeft, ChevronRight, Filter, Server, Globe, Layers } from "lucide-react";
 
 const projects = [
-  // === Spring Boot Projects (from GitHub, at top) ===
   {
     id: 101,
     title: "Microservice LMS System",
@@ -116,7 +115,17 @@ const projects = [
     category: "Spring Boot",
     featured: false
   },
-  // === Other Projects ===
+  {
+    id: 111,
+    title: "Ubar Clone Backend",
+    description: "Ride-hailing platform backend (Uber clone) built with Spring Boot — driver/rider management, trip matching, real-time fare calculation, and booking workflows.",
+    github: "https://github.com/arpondark/ubar-clone-backend-springboot",
+    link: "",
+    tech: ["Spring Boot", "REST API", "MySQL", "JPA"],
+    highlights: ["Ride-Hailing", "Booking System", "Real-time"],
+    category: "Spring Boot",
+    featured: true
+  },
   {
     id: 1,
     title: "UIU Robotics Lab",
@@ -124,7 +133,7 @@ const projects = [
     link: "https://robotics.uiu.ac.bd/",
     github: "",
     tech: ["React", "Next.js", "Tailwind CSS", "Node.js"],
-    highlights: ["Institutional Website", "Research Showcase"],
+    highlights: ["Institutional", "Research"],
     category: "Web Application",
     featured: true
   },
@@ -135,7 +144,7 @@ const projects = [
     link: "https://www.lovepropose.fun/",
     github: "https://github.com/mdshazanmahmudarpon/love-propose",
     tech: ["React", "Firebase", "Tailwind CSS", "Framer Motion"],
-    highlights: ["Interactive Cards", "Real-time Updates"],
+    highlights: ["Interactive", "Real-time"],
     category: "Web Application",
     featured: true
   },
@@ -146,7 +155,7 @@ const projects = [
     link: "https://pitasaservice.com/",
     github: "",
     tech: ["React", "Node.js", "MongoDB", "Express"],
-    highlights: ["Food Ordering", "Real-time Tracking"],
+    highlights: ["Food Ordering", "Tracking"],
     category: "E-Commerce",
     featured: true
   },
@@ -157,7 +166,7 @@ const projects = [
     link: "https://bartatest.netlify.app/",
     github: "https://github.com/mdshazanmahmudarpon/barta-test",
     tech: ["React", "Node.js", "MongoDB", "Express"],
-    highlights: ["Real-time News", "Admin Dashboard"],
+    highlights: ["Real-time", "Dashboard"],
     category: "News Portal",
     featured: false
   },
@@ -168,7 +177,7 @@ const projects = [
     link: "https://sage-tapioca-7c648d.netlify.app/",
     github: "https://github.com/mdshazanmahmudarpon/todo-app",
     tech: ["React", "TypeScript", "Tailwind CSS", "DnD Kit"],
-    highlights: ["Drag & Drop", "Task Categories"],
+    highlights: ["Drag & Drop", "Categories"],
     category: "Productivity",
     featured: false
   },
@@ -179,7 +188,7 @@ const projects = [
     link: "https://blog-arpon007.netlify.app/",
     github: "https://github.com/mdshazanmahmudarpon/blog-platform",
     tech: ["React", "Firebase", "Material UI", "Redux"],
-    highlights: ["Rich Text Editor", "Social Sharing"],
+    highlights: ["Rich Text", "Social"],
     category: "Blog Platform",
     featured: false
   },
@@ -190,7 +199,7 @@ const projects = [
     link: "https://love-mefun.netlify.app/",
     github: "https://github.com/mdshazanmahmudarpon/love-me",
     tech: ["React", "Socket.io", "Node.js", "MongoDB"],
-    highlights: ["Real-time Chat", "User Matching"],
+    highlights: ["Real-time Chat", "Matching"],
     category: "Social Platform",
     featured: false
   }
@@ -228,14 +237,16 @@ export default function ProjectShowcase3D() {
   return (
     <section
       id="projects"
-      className="relative py-24 md:py-32 overflow-hidden"
+      className="relative section-padding overflow-hidden"
     >
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-primary)] via-[var(--bg-tertiary)]/50 to-[var(--bg-primary)]" />
-      <div className="absolute inset-0 bg-grid opacity-30 dark:opacity-15" />
-
       <div
-        className="absolute top-1/4 -right-32 w-80 h-80 rounded-full bg-gradient-to-br from-[var(--accent-primary)]/20 to-transparent blur-3xl"
+        className="absolute top-1/4 -right-48 w-96 h-96 rounded-full opacity-25 animate-drift"
+        style={{ background: 'radial-gradient(circle, rgba(0,240,255,0.4), transparent 60%)', filter: 'blur(80px)' }}
+      />
+      <div
+        className="absolute bottom-1/4 -left-48 w-96 h-96 rounded-full opacity-25 animate-drift-2"
+        style={{ background: 'radial-gradient(circle, rgba(255,43,214,0.4), transparent 60%)', filter: 'blur(80px)' }}
       />
 
       <div className="container-custom relative z-10">
@@ -243,26 +254,29 @@ export default function ProjectShowcase3D() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
           <motion.div
             initial={{ scale: 0 }}
             whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 mb-6"
+            className="inline-block mb-6"
           >
-            <Zap className="w-4 h-4 text-[var(--accent-primary)]" />
-            <span className="text-sm text-[var(--accent-primary)]">Featured Projects</span>
+            <span className="hud-label">
+              <Layers className="w-3 h-3" />
+              03 // PROJECTS
+            </span>
           </motion.div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--text-primary)] mb-4">
+          <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-[var(--text-primary)] mb-6">
             My <span className="gradient-text">Creative Work</span>
           </h2>
-          <p className="text-xl text-[var(--text-secondary)] max-w-2xl mx-auto">
-            Explore my portfolio of innovative projects built with modern technologies
+          <p className="text-lg text-[var(--text-secondary)] max-w-2xl mx-auto font-mono">
+            <span className="text-[var(--neon-cyan)]">{'> '}</span>
+            Deploying solutions that perform at scale
           </p>
         </motion.div>
 
@@ -272,40 +286,48 @@ export default function ProjectShowcase3D() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
+          className="flex flex-wrap justify-center gap-2 mb-12"
         >
-          <div className="flex items-center gap-2 mr-2">
-            <Filter className="w-4 h-4 text-[var(--text-muted)]" />
-            <span className="text-sm text-[var(--text-muted)]">Filter:</span>
+          <div className="flex items-center gap-2 mr-2 font-mono text-[10px] text-[var(--text-muted)] tracking-widest">
+            <Filter className="w-3 h-3 text-[var(--neon-cyan)]" />
+            <span>FILTER:</span>
           </div>
           {[
-            { key: 'all', label: 'All Projects' },
-            { key: 'spring-boot', label: '🍃 Spring Boot' },
-            { key: 'featured', label: 'Featured' },
-            { key: 'web', label: 'Frontend' },
-            { key: 'backend', label: 'Backend' }
-          ].map(({ key, label }) => (
-            <motion.button
-              key={key}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setFilter(key as FilterType)}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${filter === key
-                ? 'bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] text-white shadow-lg'
-                : 'glass-card text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
-                }`}
-            >
-              {label}
-            </motion.button>
-          ))}
+            { key: 'all', label: 'ALL' },
+            { key: 'spring-boot', label: '🍃 SPRING' },
+            { key: 'featured', label: 'FEATURED' },
+            { key: 'web', label: 'FRONTEND' },
+            { key: 'backend', label: 'BACKEND' }
+          ].map(({ key, label }) => {
+            const isActive = filter === key;
+            return (
+              <motion.button
+                key={key}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setFilter(key as FilterType)}
+                className={`px-4 py-2 font-mono text-[11px] uppercase tracking-widest transition-all duration-300 ${isActive
+                  ? 'text-[var(--bg-void)]'
+                  : 'border border-[var(--glass-border)] bg-[var(--bg-panel)] text-[var(--text-secondary)] hover:text-[var(--neon-cyan)] hover:border-[var(--neon-cyan)]'
+                  }`}
+                style={{
+                  clipPath: 'polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))',
+                  background: isActive ? 'var(--neon-cyan)' : undefined,
+                  boxShadow: isActive ? '0 0 16px var(--neon-cyan)' : undefined,
+                }}
+              >
+                {label}
+              </motion.button>
+            );
+          })}
         </motion.div>
 
         {/* Mobile: Scroll */}
         <div className="md:hidden relative">
-          <button onClick={scrollLeft} className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 glass-card !rounded-full flex items-center justify-center text-[var(--text-primary)]">
+          <button onClick={scrollLeft} className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 border border-[var(--neon-cyan)]/40 bg-[var(--bg-panel)] flex items-center justify-center text-[var(--neon-cyan)]">
             <ChevronLeft className="w-5 h-5" />
           </button>
-          <button onClick={scrollRight} className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 glass-card !rounded-full flex items-center justify-center text-[var(--text-primary)]">
+          <button onClick={scrollRight} className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 border border-[var(--neon-cyan)]/40 bg-[var(--bg-panel)] flex items-center justify-center text-[var(--neon-cyan)]">
             <ChevronRight className="w-5 h-5" />
           </button>
           <div ref={scrollRef} className="flex gap-4 overflow-x-auto pb-4 px-8 mobile-scroll">
@@ -336,7 +358,7 @@ export default function ProjectShowcase3D() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
-                  transition={{ delay: index * 0.02 }}
+                  transition={{ delay: index * 0.04 }}
                 >
                   <ProjectCard project={project} />
                 </motion.div>
@@ -353,8 +375,13 @@ export default function ProjectShowcase3D() {
           transition={{ delay: 0.5 }}
           className="text-center mt-16"
         >
-          <p className="text-[var(--text-secondary)] mb-6">
-            Want to see more or discuss a project?
+          <div className="inline-block mb-4">
+            <span className="font-mono text-xs text-[var(--text-muted)] tracking-widest">
+              <span className="text-[var(--neon-cyan)]">{'> '}</span>END_OF_LIST.exe
+            </span>
+          </div>
+          <p className="text-[var(--text-secondary)] mb-6 font-mono text-sm">
+            // Want to see more or discuss a project?
           </p>
           <motion.a
             href="https://github.com/arpondark"
@@ -362,9 +389,9 @@ export default function ProjectShowcase3D() {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] rounded-full text-lg font-semibold text-white shadow-lg hover:shadow-[var(--glow-green)] transition-shadow"
+            className="btn-primary inline-flex items-center gap-3"
           >
-            <Github className="w-5 h-5" />
+            <Github className="w-4 h-4" />
             View All on GitHub
           </motion.a>
         </motion.div>
@@ -373,77 +400,130 @@ export default function ProjectShowcase3D() {
   );
 }
 
-/* ============================
-   Project Card — No Image
-   ============================ */
 function ProjectCard({ project }: { project: typeof projects[0] }) {
   const isSpringBoot = project.category === 'Spring Boot';
+  const accent = isSpringBoot ? 'var(--neon-lime)' : 'var(--neon-cyan)';
 
   return (
     <div className="group relative h-full">
-      <div className="relative overflow-hidden glass-card h-full transition-all duration-300 hover:!border-[var(--accent-primary)]/30 hover:shadow-lg p-5 flex flex-col">
+      <div
+        className="relative overflow-hidden bg-[var(--bg-panel)] h-full transition-all duration-300 hover:-translate-y-1 p-6 border border-[var(--glass-border)] hover:border-[var(--neon-cyan)]"
+        style={{
+          clipPath: 'polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))',
+        }}
+      >
+        {/* Hover glow */}
+        <div
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+          style={{
+            background: `linear-gradient(180deg, ${accent}10, transparent 60%)`,
+          }}
+        />
+
+        {/* Top corner indicator */}
+        <div
+          className="absolute top-0 right-0 w-3 h-3"
+          style={{
+            background: accent,
+            clipPath: 'polygon(100% 0, 0 0, 100% 100%)',
+          }}
+        />
+
         {/* Header */}
-        <div className="flex items-start justify-between gap-3 mb-3">
-          <div className="flex items-center gap-2 flex-1 min-w-0">
-            {/* Icon */}
-            <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${isSpringBoot
-              ? 'bg-green-500/15 text-green-600 dark:text-green-400'
-              : 'bg-[var(--accent-primary)]/10 text-[var(--accent-primary)]'
-              }`}>
-              {isSpringBoot ? <Server className="w-4.5 h-4.5" /> : <Globe className="w-4.5 h-4.5" />}
+        <div className="flex items-start justify-between gap-3 mb-4 relative z-10">
+          <div className="flex items-center gap-3 flex-1 min-w-0">
+            <div
+              className="w-10 h-10 flex items-center justify-center flex-shrink-0 border"
+              style={{
+                borderColor: accent,
+                color: accent,
+                background: `${accent}10`,
+                boxShadow: `0 0 12px ${accent}40`,
+                clipPath: 'polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px))',
+              }}
+            >
+              {isSpringBoot ? <Server className="w-4 h-4" /> : <Globe className="w-4 h-4" />}
             </div>
             <div className="min-w-0">
-              <h3 className="text-base font-bold text-[var(--text-primary)] truncate group-hover:gradient-text transition-all">
+              <h3 className="text-base font-display font-bold text-[var(--text-primary)] truncate group-hover:text-[var(--neon-cyan)] transition-colors tracking-wider">
                 {project.title}
               </h3>
-              <div className="flex items-center gap-1.5">
-                <Code2 className="w-3 h-3 text-[var(--accent-primary)]" />
-                <span className="text-xs text-[var(--accent-primary)] font-medium">{project.category}</span>
+              <div className="flex items-center gap-1.5 mt-0.5">
+                <Code2 className="w-3 h-3" style={{ color: accent }} />
+                <span className="font-mono text-[10px] uppercase tracking-widest" style={{ color: accent }}>
+                  {project.category}
+                </span>
               </div>
             </div>
           </div>
 
-          {/* Featured badge */}
           {project.featured && (
-            <span className="px-2 py-0.5 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] text-white text-[10px] font-semibold rounded-full flex-shrink-0">
-              Featured
+            <span
+              className="font-mono text-[9px] font-semibold px-2 py-1 tracking-widest flex-shrink-0 text-[var(--bg-void)]"
+              style={{
+                background: 'var(--neon-magenta)',
+                boxShadow: '0 0 12px var(--neon-magenta)',
+                clipPath: 'polygon(0 0, calc(100% - 4px) 0, 100% 4px, 100% 100%, 4px 100%, 0 calc(100% - 4px))',
+              }}
+            >
+              ★ FEATURED
             </span>
           )}
         </div>
 
         {/* Description */}
-        <p className="text-[var(--text-secondary)] text-sm mb-4 line-clamp-2 flex-grow">
+        <p className="text-[var(--text-secondary)] text-sm mb-5 leading-relaxed relative z-10 line-clamp-2">
           {project.description}
         </p>
 
         {/* Tech Stack */}
-        <div className="flex flex-wrap gap-1.5 mb-4">
-          {project.tech.map((tech) => (
-            <span key={tech} className="px-2 py-0.5 text-xs bg-[var(--glass-bg)] text-[var(--text-muted)] rounded-full border border-[var(--glass-border)]">
+        <div className="flex flex-wrap gap-1.5 mb-3 relative z-10">
+          {project.tech.slice(0, 4).map((tech) => (
+            <span
+              key={tech}
+              className="font-mono text-[10px] uppercase tracking-wider px-2 py-0.5 border"
+              style={{
+                borderColor: 'var(--glass-border)',
+                color: 'var(--text-secondary)',
+                background: 'var(--bg-elevated)',
+              }}
+            >
               {tech}
             </span>
           ))}
         </div>
 
         {/* Highlights */}
-        <div className="flex flex-wrap gap-1.5 mb-4">
+        <div className="flex flex-wrap gap-1.5 mb-5 relative z-10">
           {project.highlights.map((h) => (
-            <span key={h} className="px-2 py-0.5 text-xs bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] rounded-full border border-[var(--accent-primary)]/20">
-              {h}
+            <span
+              key={h}
+              className="font-mono text-[10px] uppercase tracking-wider px-2 py-0.5"
+              style={{
+                color: accent,
+                background: `${accent}10`,
+                border: `1px solid ${accent}30`,
+              }}
+            >
+              #{h}
             </span>
           ))}
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-2 mt-auto">
+        <div className="flex gap-2 mt-auto relative z-10">
           {project.link && (
             <a
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] text-white rounded-xl text-sm font-medium hover:shadow-lg transition-shadow"
+              className="flex-1 flex items-center justify-center gap-2 py-2.5 font-mono text-[11px] uppercase tracking-widest text-[var(--bg-void)] transition-all hover:shadow-[0_0_16px_var(--neon-cyan)]"
+              style={{
+                background: 'var(--neon-cyan)',
+                clipPath: 'polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px))',
+              }}
             >
-              <ExternalLink className="w-4 h-4" />
+              <ExternalLink className="w-3.5 h-3.5" />
               Demo
             </a>
           )}
@@ -452,9 +532,12 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className={`flex items-center justify-center gap-2 py-2.5 glass-card !rounded-xl text-[var(--text-primary)] text-sm font-medium transition-colors ${project.link ? 'flex-1' : 'flex-1'}`}
+              className={`flex items-center justify-center gap-2 py-2.5 border border-[var(--glass-border)] bg-[var(--bg-elevated)] hover:border-[var(--neon-cyan)] hover:text-[var(--neon-cyan)] font-mono text-[11px] uppercase tracking-widest transition-all ${project.link ? 'flex-1' : 'flex-1'}`}
+              style={{
+                clipPath: 'polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px))',
+              }}
             >
-              <Github className="w-4 h-4" />
+              <Github className="w-3.5 h-3.5" />
               Code
             </a>
           )}

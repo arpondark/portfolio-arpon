@@ -1,26 +1,33 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Funnel_Display } from "next/font/google";
+import { Space_Grotesk, Syncopate, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
 import StructuredData from "@/components/StructuredData";
 import { generateOGMetadata } from "@/lib/og-metadata";
 
-const inter = Inter({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: '--font-inter',
+  variable: '--font-body',
+  weight: ['300', '400', '500', '600', '700'],
 });
 
-const funnelDisplay = Funnel_Display({
+const syncopate = Syncopate({
   subsets: ["latin"],
-  variable: '--font-funnel',
-  weight: ['300', '400', '500', '600', '700', '800'],
+  variable: '--font-display',
+  weight: ['400', '700'],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: '--font-mono',
+  weight: ['300', '400', '500', '600'],
 });
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#10b981',
+  themeColor: '#050507',
 }
 
 // Generate OG metadata dynamically
@@ -109,23 +116,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`scroll-smooth dark ${inter.variable} ${funnelDisplay.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`scroll-smooth ${spaceGrotesk.variable} ${syncopate.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <head>
-        {/* Prevent flash: set dark mode before paint */}
+        {/* Lock dark mode for neon arena theme */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
                 try {
-                  var theme = localStorage.getItem('portfolio-theme');
-                  if (theme === 'light') {
-                    document.documentElement.classList.remove('dark');
-                  } else if (!theme) {
-                    var hour = new Date().getHours();
-                    if (hour >= 6 && hour < 18) {
-                      document.documentElement.classList.remove('dark');
-                    }
-                  }
+                  document.documentElement.classList.add('dark');
                 } catch(e) {}
               })();
             `,
@@ -133,7 +132,7 @@ export default function RootLayout({
         />
         <StructuredData />
       </head>
-      <body className={`${funnelDisplay.className} min-h-screen antialiased bg-[var(--bg-primary)] text-[var(--text-primary)]`}>
+      <body className={`${spaceGrotesk.className} min-h-screen antialiased`}>
         <ThemeProvider>
           {children}
         </ThemeProvider>
