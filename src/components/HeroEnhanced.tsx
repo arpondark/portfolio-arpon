@@ -63,31 +63,6 @@ export default function HeroEnhanced() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Animated mesh background */}
-      <div className="absolute inset-0 z-0">
-        <div
-          className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full opacity-40 animate-drift"
-          style={{
-            background: 'radial-gradient(circle, rgba(0,240,255,0.35) 0%, transparent 60%)',
-            filter: 'blur(80px)',
-          }}
-        />
-        <div
-          className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full opacity-40 animate-drift-2"
-          style={{
-            background: 'radial-gradient(circle, rgba(255,43,214,0.35) 0%, transparent 60%)',
-            filter: 'blur(80px)',
-          }}
-        />
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40%] h-[40%] rounded-full opacity-30 animate-drift"
-          style={{
-            background: 'radial-gradient(circle, rgba(198,255,61,0.3) 0%, transparent 60%)',
-            filter: 'blur(80px)',
-          }}
-        />
-      </div>
-
       {/* Scanlines */}
       <div className="absolute inset-0 pointer-events-none opacity-30">
         <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,240,255,0.03)_2px,rgba(0,240,255,0.03)_4px)]" />
@@ -230,21 +205,16 @@ export default function HeroEnhanced() {
             className="flex-shrink-0 relative"
           >
             <div className="relative">
-              {/* Outer glow */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[var(--neon-cyan)] via-[var(--neon-magenta)] to-[var(--neon-lime)] opacity-40 blur-3xl scale-125 animate-pulse-cyan" />
-
-              {/* Profile ring with conic gradient */}
-              <div className="relative profile-ring w-72 h-72 sm:w-80 sm:h-80 lg:w-[22rem] lg:h-[22rem]">
-                <div className="profile-ring-inner w-full h-full relative">
-                  <Image
-                    src="/profile.jpg"
-                    alt="MD SHAZAN MAHMUD ARPON"
-                    fill
-                    sizes="(max-width: 640px) 288px, (max-width: 1024px) 320px, 352px"
-                    className="object-cover"
-                    priority
-                  />
-                </div>
+              {/* Profile image — clean rectangle, no ring */}
+              <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-[22rem] lg:h-[22rem]">
+                <Image
+                  src="/profile.jpg"
+                  alt="MD SHAZAN MAHMUD ARPON"
+                  fill
+                  sizes="(max-width: 640px) 288px, (max-width: 1024px) 320px, 352px"
+                  className="object-cover"
+                  priority
+                />
               </div>
 
               {/* HUD Corners */}
