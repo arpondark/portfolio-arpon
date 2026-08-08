@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Syncopate, JetBrains_Mono } from "next/font/google";
+import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
 import StructuredData from "@/components/StructuredData";
@@ -9,12 +9,6 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: '--font-body',
   weight: ['300', '400', '500', '600', '700'],
-});
-
-const syncopate = Syncopate({
-  subsets: ["latin"],
-  variable: '--font-display',
-  weight: ['400', '700'],
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -27,7 +21,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#050507',
+  themeColor: '#000000',
 }
 
 // Generate OG metadata dynamically
@@ -116,20 +110,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`scroll-smooth ${spaceGrotesk.variable} ${syncopate.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`scroll-smooth ${spaceGrotesk.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <head>
-        {/* Lock dark mode for neon arena theme */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  document.documentElement.classList.add('dark');
-                } catch(e) {}
-              })();
-            `,
-          }}
-        />
         <StructuredData />
       </head>
       <body className={`${spaceGrotesk.className} min-h-screen antialiased`}>
