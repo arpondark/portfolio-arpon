@@ -1,27 +1,24 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Manrope, Newsreader } from "next/font/google";
 import "./globals.css";
-import ThemeProvider from "@/components/ThemeProvider";
 import StructuredData from "@/components/StructuredData";
 import { generateOGMetadata } from "@/lib/og-metadata";
 
-const spaceGrotesk = Space_Grotesk({
+const bodyFont = Manrope({
   subsets: ["latin"],
-  variable: '--font-body',
-  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-body-loaded',
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const displayFont = Newsreader({
   subsets: ["latin"],
-  variable: '--font-mono',
-  weight: ['300', '400', '500', '600'],
+  variable: '--font-display-loaded',
 });
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#000000',
+  themeColor: '#eef4ff',
 }
 
 // Generate OG metadata dynamically
@@ -54,8 +51,12 @@ export const metadata: Metadata = {
     "Java",
     "Portfolio",
     "Software Engineer",
+    "Open Source Contributor",
     "Frontend Developer",
-    "Backend Developer"
+    "Backend Developer",
+    "SUAS 2026",
+    "World Rank 4",
+    "UIU UAV"
   ],
   authors: [{ name: "MD SHAZAN MAHMUD ARPON", url: "https://shazan.site" }],
   creator: "MD SHAZAN MAHMUD ARPON",
@@ -83,7 +84,7 @@ export const metadata: Metadata = {
   other: {
     'linkedin:card': 'summary_large_image',
     'linkedin:title': 'MD SHAZAN MAHMUD ARPON - Spring Boot Backend Developer Portfolio',
-    'linkedin:description': 'Spring Boot Backend Developer specializing in scalable APIs, microservices, Java architecture, and AI-integrated IoT solutions.',
+    'linkedin:description': 'Backend engineer and open-source contributor building scalable services, full-stack products, and robotics systems. Member of Team UIU UAV, World Rank #4 at SUAS 2026.',
     'linkedin:image': 'https://shazan.site/og-image.png',
     'linkedin:profile': 'https://www.linkedin.com/in/md-shazan-mahmud-arpon/',
     'linkedin:author': 'https://www.linkedin.com/in/md-shazan-mahmud-arpon/',
@@ -110,15 +111,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`scroll-smooth ${spaceGrotesk.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${bodyFont.variable} ${displayFont.variable}`} suppressHydrationWarning>
       <head>
         <StructuredData />
       </head>
-      <body className={`${spaceGrotesk.className} min-h-screen antialiased`}>
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
-      </body>
+      <body className={`${bodyFont.className} min-h-screen antialiased`}>{children}</body>
     </html>
   );
 }

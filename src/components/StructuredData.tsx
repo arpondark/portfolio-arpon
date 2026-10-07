@@ -7,14 +7,15 @@ export default function StructuredData() {
     "image": "https://shazan.site/profile.jpg",
     "sameAs": [
       "https://www.linkedin.com/in/md-shazan-mahmud-arpon/",
-      "https://github.com/mdshazanmahmudarpon"
+      "https://github.com/arpondark"
     ],
-    "jobTitle": "Spring Boot Developer",
+    "jobTitle": "Backend Engineer and Open-Source Contributor",
     "worksFor": {
       "@type": "Organization",
       "name": "Independent Developer"
     },
-    "description": "Spring Boot Developer focused on Backend Engineering, scalable APIs, and AI-integrated solutions",
+    "description": "Backend engineer and open-source contributor building scalable services, full-stack products, and software for robotics and connected systems. Member of Team UIU UAV, World Rank #4 at SUAS 2026.",
+    "award": "SUAS 2026 — World Rank #4 with Team UIU UAV",
     "knowsAbout": [
       "Web Development",
       "IoT Development",

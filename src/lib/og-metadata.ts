@@ -13,9 +13,9 @@ export interface OGMetadataOptions {
 const DEFAULT_OG_CONFIG = {
   siteName: "MD SHAZAN MAHMUD ARPON - Portfolio",
   url: "https://shazan.site",
-  title: "MD SHAZAN MAHMUD ARPON - Spring Boot Backend Developer Portfolio",
+  title: "MD Shazan Mahmud Arpon — Backend Engineer & Robotics Builder",
   description:
-    "Spring Boot Backend Developer specializing in scalable APIs, microservices, Java architecture, and AI-integrated IoT solutions.",
+    "Backend engineer and open-source contributor building scalable services, full-stack products, and robotics systems. Team UIU UAV member — World Rank #4 at SUAS 2026.",
   image: "https://shazan.site/og-image.png",
   type: "profile" as const,
   locale: "en_US",
@@ -117,7 +117,8 @@ export function generatePersonSchema() {
       "https://github.com/arpondark",
       "https://twitter.com/mdshazanmahmudarpon",
     ],
-    jobTitle: "Spring Boot Developer",
+    jobTitle: "Backend Engineer and Open-Source Contributor",
+    award: "SUAS 2026 — World Rank #4 with Team UIU UAV",
     knowsAbout: [
       "Spring Boot",
       "Laravel",

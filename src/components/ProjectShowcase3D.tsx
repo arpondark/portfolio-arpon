@@ -128,8 +128,8 @@ const projects = [
   },
   {
     id: 1,
-    title: "UIU Robotics Lab",
-    description: "Official website for United International University Robotics Lab — showcasing research, projects, and achievements.",
+    title: "UIU Robotics Club",
+    description: "Official website for United International University Robotics Club — showcasing projects, activities, and achievements.",
     link: "https://robotics.uiu.ac.bd/",
     github: "",
     tech: ["React", "Next.js", "Tailwind CSS", "Node.js"],
