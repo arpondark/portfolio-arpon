@@ -118,10 +118,9 @@ export default function Navbar() {
 
             {/* Download CV */}
             <motion.a
-              href="/cv/MD._SHAZAN_MAHMUD_ARPON_.pdf"
+              href="https://drive.google.com/file/d/1xo6n7WnCAtVSVNeltZd5INMMZMzX_Xdi/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              download="MD_SHAZAN_MAHMUD_ARPON_CV.pdf"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="ml-2 px-4 py-2 border border-[var(--glass-border)] bg-[var(--bg-panel)] text-[var(--text-secondary)] hover:text-[var(--neon-cyan)] hover:border-[var(--neon-cyan)] font-mono text-xs tracking-wider transition-all duration-300 flex items-center gap-2"
@@ -212,10 +211,9 @@ export default function Navbar() {
                 ))}
 
                 <motion.a
-                  href="/cv/MD._SHAZAN_MAHMUD_ARPON_.pdf"
+                  href="https://drive.google.com/file/d/1xo6n7WnCAtVSVNeltZd5INMMZMzX_Xdi/view"
                   target="_blank"
                   rel="noopener noreferrer"
-                  download="MD_SHAZAN_MAHMUD_ARPON_CV.pdf"
                   onClick={() => setIsMobileMenuOpen(false)}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -223,7 +221,7 @@ export default function Navbar() {
                   className="mt-4 w-full py-4 border border-[var(--neon-cyan)]/30 bg-[var(--bg-panel)] text-center font-mono text-sm tracking-widest text-[var(--text-primary)] flex items-center justify-center gap-2"
                 >
                   <Download className="w-4 h-4 text-[var(--neon-cyan)]" />
-                  DOWNLOAD_CV.pdf
+                  DOWNLOAD_RESUME.pdf
                 </motion.a>
 
                 <motion.a

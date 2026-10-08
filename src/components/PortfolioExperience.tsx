@@ -428,19 +428,10 @@ function ProjectLinks({ project }: { project: Project }) {
 
 export default function PortfolioExperience() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [resumeOpen, setResumeOpen] = useState(false);
   const [filter, setFilter] = useState<"All" | Project["category"]>("All");
   const menuButtonRef = useRef<HTMLButtonElement>(null);
-  const resumeDialogRef = useRef<HTMLDivElement>(null);
-  const resumeTriggerRef = useRef<HTMLElement | null>(null);
   const filteredProjects = filter === "All" ? projects : projects.filter((project) => project.category === filter);
   const featured = projects.filter((project) => project.featured).slice(0, 5);
-
-  const openResume = () => {
-    resumeTriggerRef.current = document.activeElement as HTMLElement;
-    setMenuOpen(false);
-    setResumeOpen(true);
-  };
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -453,44 +444,6 @@ export default function PortfolioExperience() {
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
   }, [menuOpen]);
-
-  useEffect(() => {
-    if (!resumeOpen) return;
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    resumeDialogRef.current?.focus();
-
-    const handleDialogKeydown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setResumeOpen(false);
-        return;
-      }
-
-      if (event.key !== "Tab" || !resumeDialogRef.current) return;
-      const focusable = Array.from(
-        resumeDialogRef.current.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')
-      );
-      if (focusable.length === 0) return;
-
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-
-    document.addEventListener("keydown", handleDialogKeydown);
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      document.removeEventListener("keydown", handleDialogKeydown);
-      resumeTriggerRef.current?.focus();
-    };
-  }, [resumeOpen]);
 
   return (
     <div className="site-shell">
@@ -512,9 +465,9 @@ export default function PortfolioExperience() {
             {navLinks.map((link) => <Link key={link.href} href={link.href}>{link.label}</Link>)}
           </nav>
 
-          <button className="nav-cta" type="button" onClick={openResume}>
+          <a className="nav-cta" href="https://drive.google.com/file/d/1xo6n7WnCAtVSVNeltZd5INMMZMzX_Xdi/view" target="_blank" rel="noopener noreferrer">
             View résumé <ExternalLink aria-hidden="true" />
-          </button>
+          </a>
 
           <button
             ref={menuButtonRef}
@@ -534,67 +487,10 @@ export default function PortfolioExperience() {
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>{link.label}</Link>
             ))}
-            <button type="button" onClick={openResume}>View résumé</button>
+            <a href="https://drive.google.com/file/d/1xo6n7WnCAtVSVNeltZd5INMMZMzX_Xdi/view" target="_blank" rel="noopener noreferrer">View résumé</a>
           </nav>
         )}
       </header>
-
-      {resumeOpen && (
-        <div
-          className="resume-modal"
-          role="presentation"
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) setResumeOpen(false);
-          }}
-        >
-          <div
-            ref={resumeDialogRef}
-            className="resume-dialog"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="resume-dialog-title"
-            tabIndex={-1}
-          >
-            <div className="resume-dialog-header">
-              <div className="resume-dialog-title">
-                <span>Professional résumé</span>
-                <h2 id="resume-dialog-title">MD Shazan Mahmud Arpon</h2>
-              </div>
-              <div className="resume-dialog-actions">
-                <a
-                  className="resume-open-tab"
-                  href="/cv/MD._SHAZAN_MAHMUD_ARPON_.pdf"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Open in new tab <ExternalLink aria-hidden="true" />
-                </a>
-                <a
-                  className="resume-download"
-                  href="/cv/MD._SHAZAN_MAHMUD_ARPON_.pdf"
-                  download="MD_SHAZAN_MAHMUD_ARPON_CV.pdf"
-                >
-                  Download PDF <Download aria-hidden="true" />
-                </a>
-                <button className="resume-close" type="button" onClick={() => setResumeOpen(false)} aria-label="Close résumé viewer">
-                  <X aria-hidden="true" />
-                </button>
-              </div>
-            </div>
-            <div className="resume-preview">
-              <div className="resume-preview-document">
-                <Image
-                  src="/cv/resume-preview.png"
-                  alt="Preview of MD Shazan Mahmud Arpon's résumé"
-                  width={952}
-                  height={1347}
-                  sizes="(max-width: 860px) 96vw, 780px"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       <main id="main-content">
         <section className="hero-section" id="top">
@@ -643,6 +539,38 @@ export default function PortfolioExperience() {
             <div><strong>#4</strong><span>World rank at SUAS 2026<br />with Team UIU UAV</span></div>
             <div><strong>{projects.length}</strong><span>Public projects across<br />backend and full-stack</span></div>
             <div><strong>03</strong><span>Core disciplines: backend,<br />web, and robotics</span></div>
+          </div>
+        </section>
+
+        <section className="about-section section-shell" id="about">
+          <div className="section-heading">
+            <div>
+              <h2>About me</h2>
+              <p>Backend engineer focused on microservices, asynchronous systems, and Event-Driven Architecture.</p>
+            </div>
+          </div>
+          <div className="about-grid">
+            <p className="about-lead">I design <strong>microservices</strong> and <strong>event-driven architectures</strong> for reliable, high-performance platforms.</p>
+            <div className="about-copy">
+              <p>I focus on clear service boundaries, dependable APIs, and asynchronous communication that keeps complex systems scalable and understandable as they grow.</p>
+              <div className="about-focus" aria-label="Primary backend specialties">
+                <div>
+                  <Workflow aria-hidden="true" />
+                  <span><strong>Microservices</strong><small>Independent services with clear domain boundaries and deployment paths.</small></span>
+                </div>
+                <div>
+                  <Radio aria-hidden="true" />
+                  <span><strong>Event-Driven Architecture (EDA)</strong><small>Asynchronous workflows built around Kafka, messaging, and resilient events.</small></span>
+                </div>
+              </div>
+              <div className="about-facts">
+                <div><MapPin aria-hidden="true" /><span>Bangladesh</span></div>
+                <div><Award aria-hidden="true" /><span>SUAS 2026 · World #4</span></div>
+                <div><Github aria-hidden="true" /><span>Open-source contributor</span></div>
+                <div><Code2 aria-hidden="true" /><span>Backend · Full-stack · Robotics</span></div>
+              </div>
+              <a className="text-link resume-text-button" href="https://drive.google.com/file/d/1xo6n7WnCAtVSVNeltZd5INMMZMzX_Xdi/view" target="_blank" rel="noopener noreferrer">View my résumé <ArrowUpRight aria-hidden="true" /></a>
+            </div>
           </div>
         </section>
 
@@ -777,38 +705,6 @@ export default function PortfolioExperience() {
           </div>
         </section>
 
-        <section className="about-section section-shell" id="about">
-          <div className="section-heading">
-            <div>
-              <h2>About me</h2>
-              <p>Backend engineer focused on microservices, asynchronous systems, and Event-Driven Architecture.</p>
-            </div>
-          </div>
-          <div className="about-grid">
-            <p className="about-lead">I design <strong>microservices</strong> and <strong>event-driven architectures</strong> for reliable, high-performance platforms.</p>
-            <div className="about-copy">
-              <p>I focus on clear service boundaries, dependable APIs, and asynchronous communication that keeps complex systems scalable and understandable as they grow.</p>
-              <div className="about-focus" aria-label="Primary backend specialties">
-                <div>
-                  <Workflow aria-hidden="true" />
-                  <span><strong>Microservices</strong><small>Independent services with clear domain boundaries and deployment paths.</small></span>
-                </div>
-                <div>
-                  <Radio aria-hidden="true" />
-                  <span><strong>Event-Driven Architecture (EDA)</strong><small>Asynchronous workflows built around Kafka, messaging, and resilient events.</small></span>
-                </div>
-              </div>
-              <div className="about-facts">
-                <div><MapPin aria-hidden="true" /><span>Bangladesh</span></div>
-                <div><Award aria-hidden="true" /><span>SUAS 2026 · World #4</span></div>
-                <div><Github aria-hidden="true" /><span>Open-source contributor</span></div>
-                <div><Code2 aria-hidden="true" /><span>Backend · Full-stack · Robotics</span></div>
-              </div>
-              <button className="text-link resume-text-button" type="button" onClick={openResume}>View my résumé <ArrowUpRight aria-hidden="true" /></button>
-            </div>
-          </div>
-        </section>
-
         <section className="contact-section" id="contact">
           <div className="section-shell contact-inner">
             <h2>Available for backend engineering roles.</h2>
@@ -841,9 +737,9 @@ export default function PortfolioExperience() {
             <h2>Engineering systems. Sharing the work.</h2>
             <p>Building Java and Spring Boot systems, secure APIs, and scalable software from Dhaka, Bangladesh.</p>
             <div className="footer-actions">
-              <button className="footer-resume" type="button" onClick={openResume}>
+              <a className="footer-resume" href="https://drive.google.com/file/d/1xo6n7WnCAtVSVNeltZd5INMMZMzX_Xdi/view" target="_blank" rel="noopener noreferrer">
                 View résumé <ExternalLink aria-hidden="true" />
-              </button>
+              </a>
               <a className="footer-email" href="mailto:shazanarpon@shazan.site">Email me <Mail aria-hidden="true" /></a>
             </div>
           </div>

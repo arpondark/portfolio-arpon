@@ -40,7 +40,7 @@ Visitors scan the site on desktop and mobile, compare project scope and technolo
 ## Evidence on Hand
 
 - Profile photograph: `public/profile.jpg`.
-- CV: `public/cv/MD._SHAZAN_MAHMUD_ARPON_.pdf`.
+- Résumé PDF: hosted on [Google Drive](https://drive.google.com/file/d/1xo6n7WnCAtVSVNeltZd5INMMZMzX_Xdi/view) and opened directly in a new browser tab from résumé links.
 - Nineteen project entries and their source/live URLs in `src/components/PortfolioExperience.tsx`, led by the open-source Uber DOMA Architecture contribution.
 - Three supplied event photographs in `public/price/1.jpg`, `2.jpg`, and `3.jpg`, visibly documenting the UIU/UAV team, award presentation, and “World's Top 4” recognition.
 - Existing professional contact and social links in the source.
