@@ -130,6 +130,7 @@ Glass is a hierarchy material, not decoration. Navigation, evidence, archives, a
 - Pearl-blue ambient ground with restrained cobalt and aqua refraction.
 - Distinct glass plane roles for navigation, evidence, action, and archive surfaces.
 - Deep-navy proof sections that separate high-value evidence from the light field.
+- A light closing field anchored by one dominant dark repository banner.
 - Newsreader display type paired with precise Manrope interface and body copy.
 - Motion that is sparse, optical, and fully removable under reduced-motion preferences.
 
@@ -160,7 +161,7 @@ The palette moves between a cool pearl daylight field and deep navy proof enviro
 
 **The Refraction Budget Rule.** Cobalt directs; aqua refracts. Neither becomes an all-over neon atmosphere, and aqua remains rarer than cobalt.
 
-**The Proof Field Rule.** Use deep navy for concentrated proof, achievement photography, recruiting contact, and the footer—not as an alternating stripe after every light section.
+**The Proof Field Rule.** Use deep navy for concentrated proof, achievement photography, and recruiting contact—not as an alternating stripe after every light section. The footer is the deliberate exception: it returns to a light pearl field and concentrates the dark contrast inside one primary repository banner.
 
 ## Typography
 
@@ -257,7 +258,11 @@ Every skill mark sits in a small white-glass tile (2rem square, 9px radius) with
 
 ### Deep Proof Sections
 
-Achievement, recruiting contact, and footer surfaces use the navy family to concentrate attention around factual evidence and direct action. Their internal glass remains transparent enough to read as layered, while white and night-muted typography protects contrast. Achievement photography keeps editorial captions, controlled image zoom on hover, and an opaque navy fallback when blur is unavailable.
+Achievement and recruiting contact surfaces use the navy family to concentrate attention around factual evidence and direct action. Their internal glass remains transparent enough to read as layered, while white and night-muted typography protects contrast. Achievement photography keeps editorial captions, controlled image zoom on hover, and an opaque navy fallback when blur is unavailable.
+
+### Footer Closure
+
+The footer returns the page to a light pearl-blue closing field instead of extending the navy proof environment. Its first and strongest element is a full-width dark GitHub banner: a 16px authored plane with a navy gradient, soft blue refraction, restrained lift, and a pale nested action. Supporting identity, résumé, email, navigation, and legal links remain on the light field so the repository invitation owns the closing contrast. On phone, preserve the banner hierarchy by wrapping its action beneath the copy rather than reducing it to an ordinary inline link.
 
 ### Motion & Interaction
 
@@ -271,6 +276,7 @@ Ambient orbs drift slowly over 18 seconds; the hero copy resolves once over 850m
 - **Do** assign each glass plane a functional depth: navigation, evidence, action, or archive.
 - **Do** preserve the authored tablet composition between approximately 577px and 860px.
 - **Do** keep every project discoverable through the continuous featured ledger and full archive.
+- **Do** close on a light footer field with one dominant dark GitHub banner.
 - **Do** use Newsreader for editorial hierarchy and Manrope for readable technical detail.
 - **Do** retain PHP and Laravel as first-class branded skills using their correct asset and glyph treatment.
 - **Do** maintain keyboard focus visibility, a working skip link, semantic native controls, labeled external actions, strong text contrast, and the reduced-motion override.

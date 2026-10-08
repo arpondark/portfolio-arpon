@@ -19,7 +19,10 @@ import {
   SiLinux,
   SiMongodb,
   SiMysql,
+  SiNodedotjs,
   SiNextdotjs,
+  SiExpress,
+  SiNestjs,
   SiOpenjdk,
   SiPhp,
   SiPostgresql,
@@ -237,12 +240,14 @@ const navLinks = [
   { href: "#about", label: "About" },
 ];
 
+const primaryGitHubUrl = "https://github.com/arpondark";
+
 const capabilities = [
   {
     title: "Backend systems",
     icon: Server,
     copy: "Spring Boot services, secure REST APIs, data modeling, microservice boundaries, and event-driven workflows.",
-    tools: ["Java", "Spring Boot", "Kafka", "PostgreSQL", "Docker"],
+    tools: ["Java", "Spring Boot", "Kafka", "Event-Driven Architecture (EDA)", "PostgreSQL", "Docker"],
   },
   {
     title: "Full-stack products",
@@ -269,7 +274,6 @@ const skillGroups = [
       "TypeScript",
       "Python",
       "PHP",
-      "Laravel",
       "React.js",
       "Next.js",
     ],
@@ -280,6 +284,10 @@ const skillGroups = [
     items: [
       "Spring Boot",
       "Spring Security",
+      "Laravel",
+      "Node.js",
+      "Express.js",
+      "NestJS",
       "REST APIs",
       "gRPC",
       "GraphQL",
@@ -324,6 +332,9 @@ const skillIcons: Record<string, IconType> = {
   Python: SiPython,
   PHP: SiPhp,
   Laravel: SiLaravel,
+  "Node.js": SiNodedotjs,
+  "Express.js": SiExpress,
+  NestJS: SiNestjs,
   "React.js": SiReact,
   "Next.js": SiNextdotjs,
   "Spring Boot": SiSpringboot,
@@ -394,6 +405,8 @@ function SkillMark({ name }: { name: string }) {
 }
 
 function ProjectLinks({ project }: { project: Project }) {
+  const githubUrl = project.github ?? primaryGitHubUrl;
+
   return (
     <div className="project-links">
       {project.link && (
@@ -401,11 +414,14 @@ function ProjectLinks({ project }: { project: Project }) {
           Live site <ExternalLink aria-hidden="true" />
         </a>
       )}
-      {project.github && (
-        <a href={project.github} target="_blank" rel="noreferrer" aria-label={`Open ${project.title} source code`}>
-          GitHub <Github aria-hidden="true" />
-        </a>
-      )}
+      <a
+        href={githubUrl}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={project.github ? `Open ${project.title} source code on GitHub` : "Visit Arpon's GitHub profile"}
+      >
+        {project.github ? "GitHub" : "GitHub profile"} <Github aria-hidden="true" />
+      </a>
     </div>
   );
 }
@@ -765,13 +781,23 @@ export default function PortfolioExperience() {
           <div className="section-heading">
             <div>
               <h2>About me</h2>
-              <p>Software engineer specializing in backend development with Java and Spring Boot.</p>
+              <p>Backend engineer focused on microservices, asynchronous systems, and Event-Driven Architecture.</p>
             </div>
           </div>
           <div className="about-grid">
-            <p className="about-lead">I design distributed systems and scalable backend architectures for reliable, high-performance applications.</p>
+            <p className="about-lead">I design <strong>microservices</strong> and <strong>event-driven architectures</strong> for reliable, high-performance platforms.</p>
             <div className="about-copy">
-              <p>I care about clear system boundaries, dependable APIs, and software that stays understandable as it grows. I enjoy working with teams that test assumptions early and turn ambitious ideas into useful, maintainable products.</p>
+              <p>I focus on clear service boundaries, dependable APIs, and asynchronous communication that keeps complex systems scalable and understandable as they grow.</p>
+              <div className="about-focus" aria-label="Primary backend specialties">
+                <div>
+                  <Workflow aria-hidden="true" />
+                  <span><strong>Microservices</strong><small>Independent services with clear domain boundaries and deployment paths.</small></span>
+                </div>
+                <div>
+                  <Radio aria-hidden="true" />
+                  <span><strong>Event-Driven Architecture (EDA)</strong><small>Asynchronous workflows built around Kafka, messaging, and resilient events.</small></span>
+                </div>
+              </div>
               <div className="about-facts">
                 <div><MapPin aria-hidden="true" /><span>Bangladesh</span></div>
                 <div><Award aria-hidden="true" /><span>SUAS 2026 · World #4</span></div>
@@ -795,17 +821,31 @@ export default function PortfolioExperience() {
       </main>
 
       <footer className="site-footer">
+        <div className="footer-github-wrap">
+          <a className="footer-github" href={primaryGitHubUrl} target="_blank" rel="noreferrer">
+            <span className="footer-github-icon" aria-hidden="true"><Github /></span>
+            <span className="footer-github-copy">
+              <strong>Explore my open-source work.</strong>
+              <span>github.com/arpondark · repositories, contributions, and experiments</span>
+            </span>
+            <span className="footer-github-cta">Visit GitHub <ArrowUpRight aria-hidden="true" /></span>
+          </a>
+        </div>
+
         <div className="footer-main">
           <div className="footer-intro">
             <Link href="#top" className="footer-brand" aria-label="Shazan Arpon — back to top">
               <span className="footer-mark" aria-hidden="true">AM</span>
               <span>MD Shazan Mahmud Arpon</span>
             </Link>
-            <h2>Backend engineer and open-source contributor.</h2>
+            <h2>Engineering systems. Sharing the work.</h2>
             <p>Building Java and Spring Boot systems, secure APIs, and scalable software from Dhaka, Bangladesh.</p>
-            <button className="footer-resume" type="button" onClick={openResume}>
-              View résumé <ExternalLink aria-hidden="true" />
-            </button>
+            <div className="footer-actions">
+              <button className="footer-resume" type="button" onClick={openResume}>
+                View résumé <ExternalLink aria-hidden="true" />
+              </button>
+              <a className="footer-email" href="mailto:shazanarpon@shazan.site">Email me <Mail aria-hidden="true" /></a>
+            </div>
           </div>
 
           <nav className="footer-column" aria-label="Footer navigation">
@@ -816,7 +856,7 @@ export default function PortfolioExperience() {
 
           <div className="footer-column footer-connect">
             <span>Connect</span>
-            <a href="https://github.com/arpondark" target="_blank" rel="noreferrer">GitHub <Github aria-hidden="true" /></a>
+            <a href={primaryGitHubUrl} target="_blank" rel="noreferrer">GitHub <Github aria-hidden="true" /></a>
             <a href="https://www.linkedin.com/in/md-shazan-mahmud-arpon" target="_blank" rel="noreferrer">LinkedIn <Linkedin aria-hidden="true" /></a>
             <a href="mailto:shazanarpon@shazan.site">Email <Mail aria-hidden="true" /></a>
           </div>
